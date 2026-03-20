@@ -38,6 +38,11 @@
   background:rgba(15,13,11,0.94)!important;
 }
 [data-theme="dark"] .mobile-drawer{background:var(--rice)}
+[data-theme="dark"] .work-overlay{background:linear-gradient(190deg,transparent 25%,rgba(247,245,240,.04) 55%,rgba(247,245,240,.88) 100%)}
+[data-theme="dark"] .work-info h3{color:#1A1714}
+[data-theme="dark"] .work-type{color:rgba(26,23,20,.55)}
+[data-theme="dark"] .work-info p{color:rgba(26,23,20,.6)}
+[data-theme="dark"] .work-info{text-shadow:none}
 [data-theme="dark"] #process{background:#1E1A16}
 [data-theme="dark"] .about-img{background:linear-gradient(145deg,#2A2520 0%,#1E1A16 100%)}
 [data-theme="dark"] .svc{background:var(--card)}
@@ -360,7 +365,7 @@ section{padding:140px 64px}
 
 .work-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(160deg,transparent 30%,rgba(26,23,20,.02) 60%,rgba(26,23,20,.78) 100%);
+  background:linear-gradient(190deg,transparent 25%,rgba(26,23,20,.04) 55%,rgba(26,23,20,.88) 100%);
   opacity:0;
   transition:opacity .45s ease;
 }
@@ -371,6 +376,7 @@ section{padding:140px 64px}
   display:flex;flex-direction:column;justify-content:flex-end;
   opacity:0;transform:translateY(12px);
   transition:opacity .4s ease,transform .4s cubic-bezier(.4,0,.2,1);
+  text-shadow:0 1px 8px rgba(0,0,0,.6);
 }
 .work-item:hover .work-info{opacity:1;transform:translateY(0)}
 .work-type{
@@ -839,52 +845,34 @@ footer{
     <a href="#contact" class="work-browse">Start your project &rarr;</a>
   </div>
   <div class="work-grid">
-    <div class="work-item reveal">
-      <div class="bg"></div>
-      <div class="work-deco">
-        <svg width="140" height="140" viewBox="0 0 140 140" fill="none">
-          <circle cx="70" cy="70" r="60" stroke="white" stroke-width="4" opacity="0.8"/>
-          <circle cx="70" cy="70" r="40" stroke="white" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.5"/>
-          <circle cx="70" cy="70" r="8" fill="white" opacity="0.5"/>
-        </svg>
+    <a href="tendril.html" class="work-item reveal" style="text-decoration:none">
+      <div class="bg" style="background-image:url('images/tendril/framer-01.jpg');background-size:cover;background-position:center"></div>
+      <div class="work-overlay"></div>
+      <div class="work-info">
+        <span class="work-type">Brand Identity · Exhibition Design</span>
+        <h3>Tendril Tattoo</h3>
+        <p>Brand system for a conceptual tattoo studio specializing in custom sigils</p>
       </div>
+    </a>
+    <a href="broadsheet.html" class="work-item reveal" style="transition-delay:.08s;text-decoration:none">
+      <div class="bg" style="background-image:url('images/broadsheet/cover.jpg');background-size:cover;background-position:center"></div>
+      <div class="work-overlay"></div>
+      <div class="work-info">
+        <span class="work-type">Info Design · Print · Digital</span>
+        <h3>1 in 292 Million</h3>
+        <p>Broadsheet, microsite &amp; sticker campaign exploring the Powerball lottery</p>
+        <p style="font-size:10px;opacity:.6;margin-top:6px;font-family:var(--sans)">Recognized by Information is Beautiful Awards Shortlist &amp; Nightingale</p>
+      </div>
+    </a>
+    <a href="randamu.html" class="work-item reveal" style="transition-delay:.16s;text-decoration:none">
+      <div class="bg" style="background:linear-gradient(135deg,#0d2580 0%,#12339E 60%,#1a3fb5 100%)"></div>
       <div class="work-overlay"></div>
       <div class="work-info">
         <span class="work-type">Brand Identity</span>
-        <h3>Roast &amp; Pour</h3>
-        <p>Visual identity for a specialty coffee shop</p>
+        <h3>Randamu</h3>
+        <p>Identity system for a distributed randomness beacon</p>
       </div>
-    </div>
-    <div class="work-item reveal" style="transition-delay:.08s">
-      <div class="bg"></div>
-      <div class="work-deco">
-        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-          <rect x="10" y="10" width="100" height="100" rx="14" stroke="white" stroke-width="4" opacity="0.8"/>
-          <rect x="28" y="28" width="64" height="64" rx="8" stroke="white" stroke-width="2" opacity="0.4"/>
-          <rect x="46" y="46" width="28" height="28" rx="5" fill="white" opacity="0.3"/>
-        </svg>
-      </div>
-      <div class="work-overlay"></div>
-      <div class="work-info">
-        <span class="work-type">Data Visualization</span>
-        <h3>Climate Pulse</h3>
-        <p>Interactive environmental data storytelling</p>
-      </div>
-    </div>
-    <div class="work-item reveal" style="transition-delay:.16s">
-      <div class="bg"></div>
-      <div class="work-deco">
-        <svg width="130" height="130" viewBox="0 0 130 130" fill="none">
-          <path d="M65 8 L78 48 L120 48 L87 73 L100 113 L65 88 L30 113 L43 73 L10 48 L52 48 Z" stroke="white" stroke-width="3.5" stroke-linejoin="round" fill="white" fill-opacity="0.1"/>
-        </svg>
-      </div>
-      <div class="work-overlay"></div>
-      <div class="work-info">
-        <span class="work-type">Web Design</span>
-        <h3>Fern &amp; Folio</h3>
-        <p>E-commerce site for an independent bookshop</p>
-      </div>
-    </div>
+    </a>
     <div class="work-item reveal" style="transition-delay:.24s">
       <div class="bg"></div>
       <div class="work-deco">
@@ -919,7 +907,7 @@ footer{
     </div>
   </div>
   <p class="work-note">
-    ✦ &nbsp;Real projects coming soon — meanwhile, here's the vibe. And honestly? The vibe is very good.&nbsp; ✦
+    ✦ &nbsp;More projects coming soon.&nbsp; ✦
   </p>
 </section>
 

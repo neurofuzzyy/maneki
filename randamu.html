@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Randamu — Maneki Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Cormorant+SC:wght@600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --rice:#F7F5F0;--ink:#1A1714;--red:#C53D2D;--stone:#A39E95;
+  --border:#E8E4DD;
+  --display:'Cormorant Garamond',serif;--sc:'Cormorant SC',serif;--sans:'DM Sans',sans-serif;
+}
+[data-theme="dark"]{--rice:#0F0D0B;--ink:#EDE9E3;--stone:#7A746E;--border:#2A2520}
+html{scroll-behavior:smooth}
+body{background:var(--rice);color:var(--ink);font-family:var(--sans);transition:background .3s,color .3s}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:64px;
+  background:var(--rice);border-bottom:1px solid var(--border);
+  transition:background .3s,border-color .3s;
+}
+.nav-logo{font-family:var(--sc);font-size:17px;letter-spacing:.04em;color:var(--ink);text-decoration:none}
+.nav-right{display:flex;align-items:center;gap:24px}
+.back-link{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--stone);text-decoration:none;transition:color .2s}
+.back-link:hover{color:var(--red)}
+.theme-btn{background:none;border:1px solid var(--border);border-radius:50%;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink);font-size:14px;transition:border-color .2s}
+.theme-btn:hover{border-color:var(--stone)}
+
+/* HERO */
+.hero{
+  margin-top:64px;width:100%;min-height:80vh;
+  background:linear-gradient(135deg,#0d1a4a 0%,#1a1060 50%,#2d0a3a 100%);
+  display:flex;align-items:center;justify-content:center;
+  padding:80px;
+}
+.hero img{width:100%;max-width:400px;height:auto;display:block}
+
+/* PROJECT INFO */
+.project-info{
+  display:grid;grid-template-columns:1fr 1fr;
+  padding:80px 80px 72px;gap:60px;
+  border-bottom:1px solid var(--border);
+}
+.project-eyebrow{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:24px;display:block}
+.project-title{font-family:var(--display);font-size:clamp(44px,5vw,72px);font-weight:600;line-height:1.0;margin-bottom:28px}
+.meta-row{display:flex;flex-direction:column;gap:8px}
+.meta-item{font-family:var(--sans);font-size:12px;color:var(--stone);line-height:1.6}
+.meta-item strong{color:var(--ink);font-weight:600;margin-right:8px}
+.info-right{display:flex;flex-direction:column;justify-content:flex-end;gap:20px}
+.info-right p{font-family:var(--sans);font-size:15px;line-height:1.85;color:var(--stone)}
+
+/* SECTION LABEL */
+.section-label{font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--stone);opacity:.55;display:block;margin-bottom:36px}
+
+/* LOGO SYSTEM */
+.logos-section{padding:72px 80px;border-bottom:1px solid var(--border)}
+.logos-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.logo-item{padding:56px;display:flex;align-items:center;justify-content:center}
+.logo-item.on-white{background:#ffffff}
+.logo-item.on-dark{background:linear-gradient(135deg,#0d1a4a 0%,#1a1060 50%,#2d0a3a 100%)}
+.logo-item.on-grey{background:#f0f0f0}
+.logo-item.on-black{background:#111}
+.logo-item img{max-width:100%;max-height:160px;width:auto;height:auto;display:block}
+.logo-caption{font-family:var(--sans);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--stone);opacity:.55;text-align:center;padding:12px 56px 32px}
+
+/* HORIZONTAL LOGO */
+.horizontal-section{padding:64px 80px;border-bottom:1px solid var(--border);background:#fff}
+[data-theme="dark"] .horizontal-section{background:#1a1714}
+.horizontal-section img{width:100%;max-width:700px;height:auto;display:block;margin:0 auto}
+
+/* PORTRAITS */
+.portraits-section{background:linear-gradient(135deg,#0d1a4a 0%,#1a1060 50%,#2d0a3a 100%);padding:72px 80px}
+.portraits-section .section-label{color:rgba(255,255,255,.3);opacity:1}
+.portraits-intro{font-family:var(--sans);font-size:14px;line-height:1.8;color:rgba(255,255,255,.45);max-width:480px;margin-bottom:48px}
+.portraits-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.portrait-item{display:flex;flex-direction:column;gap:12px}
+.portrait-item img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:8px}
+.portrait-name{font-family:var(--sans);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3)}
+
+/* FOOTER */
+.project-footer{padding:48px 80px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.project-footer a{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.5px;color:var(--stone);text-decoration:none;transition:color .2s}
+.project-footer a:hover{color:var(--red)}
+.prev-label{display:block;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--stone);opacity:.5;margin-bottom:6px}
+
+@media(max-width:900px){
+  nav{padding:0 24px}
+  .hero{padding:60px 24px;min-height:60vw}
+  .project-info{grid-template-columns:1fr;padding:48px 24px;gap:32px}
+  .logos-section,.portraits-section,.horizontal-section{padding:48px 24px}
+  .logos-grid{grid-template-columns:1fr}
+  .logo-item{padding:40px}
+  .logo-caption{padding:8px 40px 24px}
+  .portraits-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .project-footer{padding:40px 24px;flex-direction:column;gap:20px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Maneki Studio</a>
+  <div class="nav-right">
+    <a href="index.html#work" class="back-link">← All work</a>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">◐</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="images/randamu/symbol.png" alt="Randamu logo mark — glitch dice">
+</div>
+
+<!-- PROJECT INFO -->
+<section class="project-info">
+  <div>
+    <span class="project-eyebrow">Logo Design · Art Direction</span>
+    <h1 class="project-title">Randamu</h1>
+    <div class="meta-row">
+      <span class="meta-item"><strong>Client</strong>Randamu</span>
+      <span class="meta-item"><strong>Deliverables</strong>Logo system, portrait photo treatments</span>
+      <span class="meta-item"><strong>Tools</strong>Illustrator, Photoshop</span>
+    </div>
+  </div>
+  <div class="info-right">
+    <p>Randamu needed a logo that felt energetic, digital, and a little unpredictable. The mark is built around a glitch-treated isometric die — nodding to chance and randomness while the chromatic aberration gives it a kinetic, tech-forward edge.</p>
+    <p>Alongside the logo system, I created a series of portrait photo treatments for key figures associated with the brand, each treated with a distinct colour from the palette.</p>
+  </div>
+</section>
+
+<!-- LOGO SYSTEM -->
+<div class="logos-section">
+  <span class="section-label">Logo System</span>
+  <div class="logos-grid">
+    <div class="logo-item on-white">
+      <img src="images/randamu/main-light.png" alt="Randamu full logo on white">
+    </div>
+    <div class="logo-item on-dark">
+      <img src="images/randamu/main-dark.png" alt="Randamu symbol on dark">
+    </div>
+    <div class="logo-item on-grey">
+      <img src="images/randamu/black-outline.png" alt="Randamu black outline">
+    </div>
+    <div class="logo-item on-black">
+      <img src="images/randamu/white-outline.png" alt="Randamu white outline">
+    </div>
+  </div>
+  <div class="logo-caption">Logo variations — full colour, outline, and alternate treatments</div>
+</div>
+
+<!-- HORIZONTAL LOCKUP -->
+<div class="horizontal-section">
+  <img src="images/randamu/horizontal.png" alt="Randamu horizontal logo lockup">
+</div>
+
+<!-- PORTRAIT TREATMENTS -->
+<div class="portraits-section">
+  <span class="section-label">Portrait Treatments</span>
+  <p class="portraits-intro">Key figures associated with randomness, cryptography, and technology — each treated with a signature colour from the brand palette.</p>
+  <div class="portraits-grid">
+    <div class="portrait-item">
+      <img src="images/randamu/portrait-feynman.png" alt="Richard Feynman — cyan treatment">
+      <span class="portrait-name">Richard Feynman</span>
+    </div>
+    <div class="portrait-item">
+      <img src="images/randamu/portrait-perich.png" alt="Tristan Perich — red treatment">
+      <span class="portrait-name">Tristan Perich</span>
+    </div>
+    <div class="portrait-item">
+      <img src="images/randamu/portrait-gennaro.png" alt="Rosario Gennaro — blue/yellow treatment">
+      <span class="portrait-name">Rosario Gennaro</span>
+    </div>
+    <div class="portrait-item">
+      <img src="images/randamu/portrait-assange.png" alt="Julian Assange — dark blue treatment">
+      <span class="portrait-name">Julian Assange</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="project-footer">
+  <a href="index.html#work">← Back to all work</a>
+  <div style="text-align:right">
+    <span class="prev-label">Previous project</span>
+    <a href="broadsheet.html">← 1 in 292 Million</a>
+  </div>
+</div>
+
+<script>
+const btn = document.getElementById('themeBtn');
+const saved = localStorage.getItem('maneki-theme');
+if(saved) document.documentElement.setAttribute('data-theme', saved);
+btn.addEventListener('click', () => {
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('maneki-theme', next);
+});
+</script>
+</body>
+</html>
