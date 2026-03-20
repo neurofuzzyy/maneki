@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maneki Studio — Good fortune starts with great design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Cormorant+SC:wght@600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --rice:    #F7F5F0;
+  --ink:     #1A1714;
+  --red:     #C53D2D;
+  --red-h:   #D94F3D;
+  --stone:   #A39E95;
+  --border:  #E8E4DD;
+  --card:    #FFFFFF;
+  --plum:    #4A3048;
+  --gold:    #C4A35A;
+  --charcoal:#3D3835;
+  --display: 'Cormorant Garamond',serif;
+  --sc:      'Cormorant SC',serif;
+  --sans:    'DM Sans',sans-serif;
+}
+
+/* ── DARK MODE ── */
+[data-theme="dark"]{
+  --rice:    #0F0D0B;
+  --ink:     #EDE9E3;
+  --stone:   #7A746E;
+  --border:  #2A2520;
+  --card:    #1A1714;
+}
+[data-theme="dark"] nav.scrolled{
+  background:rgba(15,13,11,0.94)!important;
+}
+[data-theme="dark"] .mobile-drawer{background:var(--rice)}
+[data-theme="dark"] #process{background:#1E1A16}
+[data-theme="dark"] .about-img{background:linear-gradient(145deg,#2A2520 0%,#1E1A16 100%)}
+[data-theme="dark"] .svc{background:var(--card)}
+[data-theme="dark"] .contact-form input,
+[data-theme="dark"] .contact-form textarea{background:var(--card);color:var(--ink)}
+
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--rice);color:var(--ink);font-family:var(--sans);
+  overflow-x:hidden;cursor:none;position:relative;
+  transition:background .3s,color .3s;
+}
+
+/* Subtle paper texture */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* ── CURSOR ── */
+.cursor-dot{
+  width:10px;height:10px;background:var(--red);border-radius:50%;
+  position:fixed;pointer-events:none;z-index:9999;
+  transition:transform .2s ease,width .2s ease,height .2s ease;
+  transform:translate(-50%,-50%);
+  will-change:left,top;
+}
+.cursor-dot.hovering{transform:translate(-50%,-50%) scale(3);opacity:0.6}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 64px;
+  transition:background .3s,backdrop-filter .3s,box-shadow .3s,padding .3s;
+}
+nav.scrolled{
+  background:rgba(247,245,240,0.94);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  box-shadow:0 1px 0 var(--border);
+  padding:15px 64px;
+}
+.logo{
+  font-family:var(--sans);font-weight:600;font-size:17px;
+  text-decoration:none;color:var(--ink);
+  display:flex;align-items:center;gap:12px;letter-spacing:-0.2px;
+}
+
+/* Maneki-neko cat SVG logo */
+.logo-mark{width:36px;height:36px;flex-shrink:0}
+
+.nav-links{display:flex;gap:40px;align-items:center}
+.nav-links a{
+  font-size:14px;font-weight:500;color:var(--ink);
+  text-decoration:none;position:relative;
+  transition:color .2s;letter-spacing:0.1px;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;
+  width:0;height:1.5px;background:var(--red);border-radius:2px;
+  transition:width .3s cubic-bezier(.4,0,.2,1);
+}
+.nav-links a:hover::after,.nav-links a:focus::after{width:100%}
+.nav-cta{
+  background:var(--ink);color:var(--rice)!important;
+  padding:10px 26px;border-radius:100px;
+  font-size:14px;font-weight:600;text-decoration:none;
+  transition:background .2s,transform .2s,box-shadow .2s;
+}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--red);transform:scale(1.03);box-shadow:0 6px 20px rgba(197,61,45,.22)}
+
+/* Hamburger */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;padding:6px;
+  background:none;border:none;cursor:none;z-index:201;
+}
+.hamburger span{
+  display:block;width:22px;height:1.5px;background:var(--ink);border-radius:2px;
+  transition:transform .3s,opacity .3s;transform-origin:center;
+}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* Mobile drawer */
+.mobile-drawer{
+  position:fixed;inset:0;z-index:199;
+  background:var(--rice);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;
+  transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);
+}
+.mobile-drawer.open{transform:translateX(0)}
+.mobile-drawer a{
+  font-family:var(--display);font-style:italic;font-size:clamp(34px,6vw,50px);
+  color:var(--ink);text-decoration:none;font-weight:400;
+  transition:color .2s;
+}
+.mobile-drawer a:hover{color:var(--red)}
+.mobile-drawer .mob-cta{
+  font-family:var(--sans);font-style:normal;font-size:16px!important;font-weight:600;
+  background:var(--red);color:white!important;
+  padding:14px 38px;border-radius:100px;
+}
+
+/* ── SECTION DIVIDER ── */
+.divider{
+  display:flex;align-items:center;gap:0;
+  margin:0 64px;height:1px;position:relative;
+}
+.divider::before,.divider::after{
+  content:'';flex:1;height:1px;background:var(--border);
+}
+.divider-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--red);
+  flex-shrink:0;margin:0 14px;
+}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:160px 64px 110px;position:relative;overflow:hidden;
+}
+.hero-label{
+  font-family:var(--sans);font-size:12px;font-weight:600;color:var(--red);
+  letter-spacing:2px;margin-bottom:40px;
+  display:inline-flex;align-items:center;gap:10px;
+  text-transform:uppercase;
+}
+.hero-label .live-dot{
+  width:7px;height:7px;background:var(--red);border-radius:50%;
+  position:relative;flex-shrink:0;
+}
+.hero-label .live-dot::after{
+  content:'';position:absolute;inset:-3px;border-radius:50%;
+  background:var(--red);opacity:0.28;
+  animation:ripple 2.4s ease-out infinite;
+}
+@keyframes ripple{0%{transform:scale(1);opacity:.28}100%{transform:scale(2.6);opacity:0}}
+
+.hero h1{
+  font-family:var(--display);font-weight:400;font-style:italic;
+  font-size:clamp(56px,8.5vw,110px);line-height:0.95;
+  letter-spacing:-2px;max-width:960px;margin-bottom:40px;
+}
+.hero h1 strong{
+  font-family:var(--display);font-weight:700;font-style:italic;
+  color:var(--red);letter-spacing:-2px;
+}
+.hero-sub{
+  font-family:var(--sans);font-size:18px;color:var(--stone);
+  max-width:480px;margin-bottom:56px;line-height:1.75;font-weight:400;
+}
+.hero-actions{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--red);color:white;
+  padding:18px 42px;border-radius:100px;
+  font-family:var(--sans);font-size:16px;font-weight:600;
+  text-decoration:none;
+  position:relative;overflow:hidden;
+  transition:transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s,background .2s;
+}
+.hero-cta::before{
+  content:'';position:absolute;top:0;left:-100%;
+  width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+  transition:left .5s ease;pointer-events:none;
+}
+.hero-cta:hover::before{left:160%}
+.hero-cta:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(197,61,45,.28);background:var(--red-h)}
+.hero-cta .arrow{display:inline-block;transition:transform .25s}
+.hero-cta:hover .arrow{transform:translateX(4px)}
+.hero-ghost{
+  font-family:var(--sans);font-size:15px;font-weight:500;color:var(--stone);
+  text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px;
+  transition:color .2s,border-color .2s;
+}
+.hero-ghost:hover{color:var(--ink);border-color:var(--ink)}
+
+/* ── FLOATING ELEMENTS ── */
+.doodles{position:absolute;top:0;right:0;bottom:0;width:46%;pointer-events:none;overflow:hidden}
+.doodle{position:absolute;animation:bob 7s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-16px) rotate(3deg)}}
+
+/* Ensō circle */
+.doodle-enso{
+  width:220px;height:220px;top:18%;right:16%;animation-delay:0s;opacity:1;
+}
+/* Gold dot grid */
+.doodle-dots{top:52%;right:10%;animation-delay:-2s;opacity:1}
+/* Vertical red line */
+.doodle-line{
+  width:1px;height:120px;background:var(--red);opacity:0.4;
+  top:30%;right:36%;animation-delay:-1.2s;
+}
+/* Watermark cat */
+.doodle-cat-wm{
+  width:100px;height:100px;top:10%;right:6%;animation-delay:-3s;opacity:0.06;
+}
+/* Geometric diamond */
+.doodle-diamond{
+  width:20px;height:20px;border:1.5px solid var(--stone);opacity:0.5;
+  top:72%;right:28%;animation-delay:-4s;transform:rotate(45deg);
+  animation-name:bob-diamond;
+}
+@keyframes bob-diamond{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(-16px)}}
+
+/* ── MARQUEE ── */
+.marquee{
+  padding:18px 0;overflow:hidden;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.marquee-inner{
+  display:flex;gap:0;animation:slide 24s linear infinite;width:max-content;
+}
+.marquee-inner span{
+  font-family:var(--sans);font-size:11px;font-weight:600;
+  letter-spacing:2.5px;text-transform:uppercase;color:var(--stone);
+  white-space:nowrap;display:flex;align-items:center;gap:0;
+  padding:0 30px;
+}
+.marquee-inner span::after{content:'✦';font-size:7px;color:var(--red);margin-left:30px}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ── SECTION BASE ── */
+section{padding:140px 64px}
+.stag{
+  font-family:var(--sc);font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  color:var(--red);margin-bottom:22px;display:inline-flex;align-items:center;gap:12px;
+}
+.stag::before{content:'';width:18px;height:1.5px;background:var(--red);border-radius:2px}
+.stitle{
+  font-family:var(--display);font-style:italic;font-weight:400;
+  font-size:clamp(40px,5vw,66px);line-height:1.04;
+  letter-spacing:-1px;margin-bottom:28px;
+}
+.stitle strong{
+  font-family:var(--display);font-weight:700;font-style:italic;
+  letter-spacing:-1px;
+}
+
+/* ── SERVICES ── */
+#services{padding-top:110px}
+.services-intro{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:48px;margin-bottom:64px;flex-wrap:wrap;
+}
+.services-intro .stitle{margin-bottom:0;max-width:620px}
+.services-intro-note{
+  font-family:var(--sans);font-size:16px;color:var(--stone);
+  line-height:1.75;max-width:280px;font-weight:400;
+}
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.svc{
+  background:var(--card);border:1px solid var(--border);border-radius:20px;
+  padding:44px 40px;position:relative;overflow:hidden;
+  transition:transform .3s cubic-bezier(.4,0,.2,1),border-color .3s,box-shadow .3s;
+  cursor:none;
+}
+.svc::after{
+  content:'';position:absolute;bottom:0;left:36px;
+  width:0;height:2px;border-radius:2px;background:var(--red);
+  transition:width .4s cubic-bezier(.4,0,.2,1);
+}
+.svc:hover::after{width:calc(100% - 72px)}
+.svc:hover{transform:translateY(-3px);border-color:rgba(197,61,45,.25);box-shadow:0 12px 36px rgba(26,23,20,.06)}
+.svc-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:48px;height:48px;border-radius:12px;margin-bottom:28px;
+  background:rgba(197,61,45,0.08);border:1px solid rgba(197,61,45,0.15);
+  position:relative;
+}
+.svc-badge::after{
+  content:'';position:absolute;bottom:-4px;right:-4px;
+  width:9px;height:9px;border-radius:50%;background:var(--red);
+  border:2px solid var(--rice);
+  transform:scale(0);transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.svc:hover .svc-badge::after{transform:scale(1)}
+.svc h3{font-family:var(--sans);font-size:20px;font-weight:600;margin-bottom:12px;letter-spacing:-0.2px}
+.svc p{font-family:var(--sans);font-size:15px;color:var(--stone);line-height:1.75}
+.svc-num{
+  position:absolute;top:36px;right:36px;
+  font-family:var(--display);font-style:italic;font-size:52px;font-weight:400;
+  color:var(--border);line-height:1;letter-spacing:-1px;
+}
+
+/* ── WORK ── */
+#work{background:var(--ink);color:var(--rice);padding:140px 64px}
+#work .stag{color:rgba(247,245,240,.32);font-family:var(--sc)}
+#work .stag::before{background:rgba(247,245,240,.2)}
+#work .stitle{color:var(--rice)}
+.work-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px;gap:24px;flex-wrap:wrap}
+.work-header .stitle{margin-bottom:0}
+.work-browse{
+  font-family:var(--sans);font-size:13px;font-weight:600;color:rgba(247,245,240,.36);
+  text-decoration:none;letter-spacing:.5px;
+  border-bottom:1px solid rgba(247,245,240,.14);padding-bottom:2px;
+  transition:color .2s,border-color .2s;
+}
+.work-browse:hover{color:var(--red);border-color:var(--red)}
+.work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:14px}
+.work-item{
+  border-radius:20px;overflow:hidden;position:relative;
+  aspect-ratio:16/11;cursor:none;
+}
+.work-item.featured{
+  grid-column:1/-1;aspect-ratio:16/7;
+}
+.work-item .bg{
+  position:absolute;inset:0;
+  transition:transform .6s cubic-bezier(.4,0,.2,1);
+}
+.work-item:hover .bg{transform:scale(1.06)}
+.work-item:nth-child(1) .bg{background:linear-gradient(135deg,#3D3835 0%,#1A1714 100%)}
+.work-item:nth-child(2) .bg{background:linear-gradient(135deg,#2C2830 0%,#4A3048 100%)}
+.work-item:nth-child(3) .bg{background:linear-gradient(135deg,#3B3228 0%,#2A2018 100%)}
+.work-item:nth-child(4) .bg{background:linear-gradient(135deg,#1E2830 0%,#162028 100%)}
+.work-item.featured .bg{background:linear-gradient(135deg,#28201A 0%,#4A3835 100%)}
+
+.work-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(160deg,transparent 30%,rgba(26,23,20,.02) 60%,rgba(26,23,20,.78) 100%);
+  opacity:0;
+  transition:opacity .45s ease;
+}
+.work-item:hover .work-overlay{opacity:1}
+
+.work-info{
+  position:absolute;inset:0;padding:32px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  opacity:0;transform:translateY(12px);
+  transition:opacity .4s ease,transform .4s cubic-bezier(.4,0,.2,1);
+}
+.work-item:hover .work-info{opacity:1;transform:translateY(0)}
+.work-type{
+  font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(247,245,240,.5);margin-bottom:6px;
+}
+.work-info h3{
+  font-family:var(--display);font-style:italic;font-weight:400;
+  font-size:clamp(20px,2.4vw,26px);color:var(--rice);line-height:1.2;
+}
+.work-info p{font-family:var(--sans);font-size:13px;color:rgba(247,245,240,.5);margin-top:5px}
+
+.work-deco{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  opacity:.15;pointer-events:none;
+  transition:transform .5s cubic-bezier(.4,0,.2,1),opacity .4s;
+}
+.work-item:hover .work-deco{opacity:.07}
+.work-item:nth-child(1):hover .work-deco{transform:translate(-50%,-50%) scale(1.1) rotate(18deg)}
+.work-item:nth-child(2):hover .work-deco{transform:translate(-50%,-50%) scale(1.08) rotate(-14deg)}
+.work-item:nth-child(3):hover .work-deco{transform:translate(-50%,-50%) scale(1.12) rotate(10deg)}
+.work-item:nth-child(4):hover .work-deco{transform:translate(-50%,-50%) scale(1.06) rotate(28deg)}
+.work-item.featured:hover .work-deco{transform:translate(-50%,-50%) scale(1.08) rotate(-7deg)}
+
+.work-note{
+  text-align:center;margin-top:8px;padding:20px;
+  color:rgba(247,245,240,.2);font-size:14px;font-family:var(--sans);
+  border:1px dashed rgba(247,245,240,.09);border-radius:14px;line-height:1.6;font-style:italic;
+}
+
+/* ── ABOUT ── */
+#about{background:var(--rice);padding-top:140px}
+.about-grid{display:grid;grid-template-columns:5fr 7fr;gap:80px;margin-top:64px;align-items:center}
+.about-img{
+  aspect-ratio:3/4;border-radius:24px;position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#EDE8E1 0%,#D8D3CD 100%);
+  display:flex;align-items:center;justify-content:center;
+}
+.about-img-deco{
+  position:absolute;bottom:-20px;right:-20px;
+  width:100px;height:100px;background:var(--red);
+  border-radius:50%;opacity:.1;
+}
+.about-placeholder{text-align:center;color:var(--stone);font-size:14px;z-index:1;font-family:var(--sans)}
+.about-placeholder .icon{font-size:44px;display:block;margin-bottom:12px}
+.about-text h3{
+  font-family:var(--display);font-style:italic;font-weight:400;
+  font-size:clamp(26px,3vw,35px);margin-bottom:24px;line-height:1.22;letter-spacing:-0.3px;
+}
+.about-text h3 strong{font-family:var(--display);font-weight:700;font-style:italic}
+.about-text p{
+  font-family:var(--sans);font-size:16px;color:var(--stone);
+  line-height:1.85;margin-bottom:18px;
+}
+.about-text p:last-of-type{margin-bottom:0}
+.stats{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.stat{
+  padding:11px 22px;border-radius:100px;
+  font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:-0.1px;
+  border:1.5px solid var(--border);background:transparent;color:var(--ink);
+}
+.stat:nth-child(1){border-color:var(--red);color:var(--red)}
+
+/* ── PROCESS ── */
+#process{
+  background:#F0EDE6;border-radius:36px;margin:0 24px;
+  padding:100px 72px;
+}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:64px}
+.step{text-align:center;position:relative}
+.step::after{
+  content:'';position:absolute;top:34px;left:calc(50% + 28px);
+  width:calc(100% - 56px);height:1px;
+  background:rgba(197,61,45,.15);
+}
+.step:last-child::after{display:none}
+.step-num{
+  font-family:var(--display);font-style:italic;font-size:66px;font-weight:400;
+  color:var(--red);opacity:.2;line-height:1;margin-bottom:16px;letter-spacing:-2px;
+}
+.step h4{font-family:var(--sans);font-size:16px;font-weight:600;margin-bottom:10px;letter-spacing:-0.1px}
+.step p{font-family:var(--sans);font-size:14px;color:var(--stone);line-height:1.72}
+
+/* ── CTA BAND ── */
+.cta{
+  text-align:center;padding:140px 64px;
+  background:var(--ink);color:var(--rice);
+  position:relative;overflow:hidden;
+}
+.cta-inner{position:relative;z-index:1}
+.cta h2{
+  font-family:var(--display);font-style:italic;font-weight:400;
+  font-size:clamp(44px,6vw,80px);line-height:1.0;
+  letter-spacing:-1.5px;margin-bottom:20px;
+}
+.cta h2 strong{
+  font-family:var(--display);font-weight:700;font-style:italic;
+  color:var(--red);letter-spacing:-1.5px;
+}
+.cta p{
+  color:rgba(247,245,240,.46);font-size:18px;margin-bottom:48px;
+  font-family:var(--sans);line-height:1.65;
+}
+.cta .hero-cta{font-size:17px;padding:21px 52px}
+.float{position:absolute;border-radius:50%;pointer-events:none}
+.float.f1{width:320px;height:320px;background:var(--red);opacity:.05;top:-100px;left:-100px}
+.float.f2{width:220px;height:220px;background:var(--gold);opacity:.05;bottom:-60px;right:-60px}
+.float.f3{width:160px;height:160px;background:var(--plum);opacity:.06;top:15%;right:12%}
+.float.f4{width:100px;height:100px;background:var(--stone);opacity:.06;bottom:20%;left:10%}
+
+/* ── CONTACT ── */
+#contact{background:var(--rice)}
+.contact-grid{display:grid;grid-template-columns:5fr 7fr;gap:80px;margin-top:64px}
+.contact-left h3{
+  font-family:var(--display);font-style:italic;font-weight:400;
+  font-size:clamp(24px,3vw,33px);margin-bottom:20px;line-height:1.28;letter-spacing:-0.3px;
+}
+.contact-left p{
+  font-family:var(--sans);font-size:16px;color:var(--stone);
+  line-height:1.85;margin-bottom:32px;
+}
+.contact-item{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:15px;color:var(--ink);font-family:var(--sans)}
+.contact-dot{width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0}
+.contact-form{display:flex;flex-direction:column;gap:11px}
+.contact-form input,.contact-form textarea{
+  font-family:var(--sans);font-size:15px;padding:15px 20px;
+  border:1px solid var(--border);border-radius:14px;
+  background:var(--card);color:var(--ink);outline:none;
+  transition:border-color .2s,border-left-width .2s,padding-left .2s;
+  border-left:3px solid transparent;
+}
+.contact-form input:focus,.contact-form textarea:focus{
+  border-color:var(--red);border-left-color:var(--red);
+}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--stone)}
+.contact-form textarea{resize:vertical;min-height:120px}
+.contact-form button{
+  background:var(--red);color:white;padding:16px 40px;border:none;
+  border-radius:100px;font-family:var(--sans);font-size:16px;font-weight:600;
+  cursor:none;align-self:flex-start;position:relative;overflow:hidden;
+  transition:transform .2s,box-shadow .2s,background .2s;
+}
+.contact-form button::before{
+  content:'';position:absolute;top:0;left:-100%;
+  width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+  transition:left .5s ease;pointer-events:none;
+}
+.contact-form button:hover::before{left:160%}
+.contact-form button:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(197,61,45,.25);background:var(--red-h)}
+
+/* ── FOOTER ── */
+footer{
+  padding:40px 64px;border-top:1px solid var(--border);
+}
+.footer-inner{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;
+}
+.footer-left{display:flex;flex-direction:column;gap:8px}
+.footer-logo{font-family:var(--sans);font-weight:600;color:var(--ink);font-size:16px;letter-spacing:-0.2px}
+.footer-copy{font-size:13px;color:var(--stone);font-family:var(--sans)}
+.footer-right{display:flex;align-items:center;gap:28px}
+.social-links{display:flex;gap:14px}
+.social-icon{
+  width:36px;height:36px;border-radius:50%;border:1px solid var(--border);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:14px;color:var(--stone);
+  transition:border-color .2s,color .2s,transform .2s;cursor:none;text-decoration:none;
+}
+.social-icon:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px)}
+.back-to-top{
+  font-family:var(--sans);font-size:13px;font-weight:500;color:var(--stone);
+  text-decoration:none;transition:color .2s;
+  display:flex;align-items:center;gap:6px;
+}
+.back-to-top:hover{color:var(--red)}
+
+/* ── THEME TOGGLE ── */
+.theme-toggle{
+  width:36px;height:36px;border-radius:50%;border:1px solid var(--border);
+  background:transparent;cursor:none;
+  display:inline-flex;align-items:center;justify-content:center;
+  color:var(--stone);transition:border-color .2s,color .2s,transform .2s;
+  flex-shrink:0;
+}
+.theme-toggle:hover{border-color:var(--red);color:var(--red);transform:scale(1.08)}
+.theme-toggle .icon-moon,.theme-toggle .icon-sun{transition:opacity .2s,transform .2s;position:absolute}
+.theme-toggle .icon-sun{opacity:0;transform:rotate(-45deg) scale(0.7)}
+[data-theme="dark"] .theme-toggle .icon-moon{opacity:0;transform:rotate(45deg) scale(0.7)}
+[data-theme="dark"] .theme-toggle .icon-sun{opacity:1;transform:rotate(0deg) scale(1)}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  nav{padding:18px 40px}
+  nav.scrolled{padding:13px 40px}
+  section{padding:110px 40px}
+  #work{padding:110px 40px}
+  .hero{padding:148px 40px 90px}
+  #process{margin:0 16px;padding:80px 48px}
+  .divider{margin:0 40px}
+  footer{padding:36px 40px}
+}
+
+@media(max-width:768px){
+  nav{padding:16px 24px}
+  nav.scrolled{padding:12px 24px}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .theme-toggle{cursor:auto}
+  section{padding:80px 24px}
+  #work{padding:80px 24px}
+  .hero{padding:120px 24px 70px}
+  .hero h1{letter-spacing:-1.5px}
+  .doodles{opacity:.35;width:100%;top:auto;bottom:60px;left:0}
+  .doodle-cat-wm,.doodle-dots{display:none}
+  .services-intro{flex-direction:column;align-items:flex-start;gap:20px}
+  .services-intro-note{max-width:100%}
+  .services-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
+  .about-grid{gap:40px}
+  .contact-grid{gap:40px}
+  .work-grid{grid-template-columns:1fr}
+  .work-item.featured{aspect-ratio:4/3}
+  .steps{grid-template-columns:repeat(2,1fr);gap:24px}
+  .step::after{display:none}
+  #process{margin:0 12px;padding:60px 28px;border-radius:24px}
+  .cta{padding:90px 24px}
+  .divider{margin:0 24px}
+  footer{padding:28px 24px}
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:24px}
+  .footer-right{flex-direction:column;align-items:flex-start;gap:16px}
+  body{cursor:auto}
+  .cursor-dot{display:none}
+}
+
+@media(max-width:480px){
+  .hero h1{font-size:clamp(44px,11vw,62px);letter-spacing:-1px}
+  .stitle{font-size:clamp(34px,8vw,46px)}
+  .steps{grid-template-columns:1fr}
+  .hero-actions{flex-direction:column;align-items:flex-start}
+  .stats{gap:8px}
+}
+
+/* ── REDUCED MOTION ── */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+  .reveal{opacity:1;transform:none}
+  .cursor-dot{display:none}
+  body{cursor:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="dot"></div>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="drawer" aria-hidden="true">
+  <a href="#services" class="mob-link">Services</a>
+  <a href="#work" class="mob-link">Work</a>
+  <a href="#about" class="mob-link">About</a>
+  <a href="#process" class="mob-link">Process</a>
+  <a href="#contact" class="mob-cta mob-link">Let's Talk</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo" aria-label="Maneki Studio — home">
+    <!-- Maneki-neko seal mark SVG -->
+    <svg class="logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Outer seal ring -->
+      <circle cx="18" cy="18" r="16" stroke="#C53D2D" stroke-width="1.5"/>
+      <!-- Left ear -->
+      <polygon points="11,8 8.5,3.5 14,6" fill="#C53D2D"/>
+      <!-- Right ear -->
+      <polygon points="25,8 27.5,3.5 22,6" fill="#C53D2D"/>
+      <!-- Head -->
+      <circle cx="18" cy="13" r="7" fill="#C53D2D"/>
+      <!-- Eyes (rice-colored dots) -->
+      <circle cx="15.5" cy="12.5" r="1" fill="#F7F5F0"/>
+      <circle cx="20.5" cy="12.5" r="1" fill="#F7F5F0"/>
+      <!-- Body -->
+      <ellipse cx="18" cy="23" rx="7.5" ry="5.5" fill="#C53D2D"/>
+      <!-- Left arm (down) -->
+      <path d="M10.5 22 Q9 24.5 10.5 26.5" stroke="#C53D2D" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <!-- Right arm (beckoning — raised up) -->
+      <path d="M25.5 20 Q29 16 27 12" stroke="#C53D2D" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <!-- Right paw tip -->
+      <circle cx="27" cy="11.5" r="1.8" fill="#C53D2D"/>
+    </svg>
+    Maneki Studio
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#process">Process</a>
+    <a href="#contact" class="nav-cta">Let's Talk</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <!-- Moon icon -->
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <!-- Sun icon -->
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-label">
+    <span class="live-dot"></span>
+    Available for new projects
+  </div>
+  <h1>Websites that bring your<br>business <strong>good fortune.</strong></h1>
+  <p class="hero-sub">I design refined, strategic digital experiences for businesses ready to make a real impression. No templates. No shortcuts. Just craft.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="hero-cta">Start a project <span class="arrow">&rarr;</span></a>
+    <a href="#work" class="hero-ghost">See the work</a>
+  </div>
+
+  <!-- Floating elements -->
+  <div class="doodles" aria-hidden="true">
+
+    <!-- Ensō circle — brush-stroke style, not perfectly closed -->
+    <div class="doodle doodle-enso">
+      <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Slightly broken stroke to suggest a brush mark — gap at top-right -->
+        <path d="M110 10 C165 10 210 55 210 110 C210 165 165 210 110 210 C55 210 10 165 10 110 C10 55 55 10 110 10" stroke="#C53D2D" stroke-width="1.5" stroke-linecap="round" opacity="0.12" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- Gold dot grid — 3×3 -->
+    <div class="doodle doodle-dots">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="6"  cy="6"  r="2.5" fill="#C4A35A" opacity="0.3"/>
+        <circle cx="26" cy="6"  r="2.5" fill="#C4A35A" opacity="0.3"/>
+        <circle cx="46" cy="6"  r="2.5" fill="#C4A35A" opacity="0.3"/>
+        <circle cx="6"  cy="26" r="2.5" fill="#C4A35A" opacity="0.3"/>
+        <circle cx="26" cy="26" r="2.5" fill="#C4A35A" opacity="0.3"/>
+        <circle cx="46" cy="26" r="2.5" fill="#C4A35A" opacity="0.3"/>
+        <circle cx="6"  cy="46" r="2.5" fill="#C4A35A" opacity="0.3"/>
+        <circle cx="26" cy="46" r="2.5" fill="#C4A35A" opacity="0.3"/>
+        <circle cx="46" cy="46" r="2.5" fill="#C4A35A" opacity="0.3"/>
+      </svg>
+    </div>
+
+    <!-- Thin vertical red line -->
+    <div class="doodle doodle-line"></div>
+
+    <!-- Cat mark watermark -->
+    <div class="doodle doodle-cat-wm">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="18" r="16" stroke="#C53D2D" stroke-width="1.5"/>
+        <polygon points="11,8 8.5,3.5 14,6" fill="#C53D2D"/>
+        <polygon points="25,8 27.5,3.5 22,6" fill="#C53D2D"/>
+        <circle cx="18" cy="13" r="7" fill="#C53D2D"/>
+        <ellipse cx="18" cy="23" rx="7.5" ry="5.5" fill="#C53D2D"/>
+        <path d="M10.5 22 Q9 24.5 10.5 26.5" stroke="#C53D2D" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M25.5 20 Q29 16 27 12" stroke="#C53D2D" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <circle cx="27" cy="11.5" r="1.8" fill="#C53D2D"/>
+      </svg>
+    </div>
+
+    <!-- Geometric diamond -->
+    <div class="doodle doodle-diamond"></div>
+
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Web Design</span><span>Branding</span><span>Visual Identity</span><span>UI/UX</span><span>Creative Direction</span><span>Data Visualization</span><span>Strategy</span><span>Responsive Design</span>
+    <span>Web Design</span><span>Branding</span><span>Visual Identity</span><span>UI/UX</span><span>Creative Direction</span><span>Data Visualization</span><span>Strategy</span><span>Responsive Design</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-intro">
+    <div>
+      <div class="stag">What I do</div>
+      <div class="stitle">Design that brings customers<br><strong>to your door.</strong></div>
+    </div>
+    <p class="services-intro-note">Everything your business needs to look credible, get found, and turn visitors into actual customers.</p>
+  </div>
+  <div class="services-grid">
+    <div class="svc reveal">
+      <!-- Browser window icon -->
+      <div class="svc-badge">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#C53D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="18" height="14" rx="2"/>
+          <line x1="2" y1="8" x2="20" y2="8"/>
+          <circle cx="5.5" cy="6" r="0.8" fill="#C53D2D" stroke="none"/>
+          <circle cx="8.5" cy="6" r="0.8" fill="#C53D2D" stroke="none"/>
+        </svg>
+      </div>
+      <span class="svc-num">01</span>
+      <h3>Website Design</h3>
+      <p>Custom-built sites that load in under two seconds, look stunning on every device, and are designed around one goal — converting visitors into customers. No templates. No shortcuts.</p>
+    </div>
+    <div class="svc reveal" style="transition-delay:.08s">
+      <!-- Hexagon icon -->
+      <div class="svc-badge">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#C53D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11,2 19.66,6.5 19.66,15.5 11,20 2.34,15.5 2.34,6.5"/>
+        </svg>
+      </div>
+      <span class="svc-num">02</span>
+      <h3>Brand Identity</h3>
+      <p>A logo anyone could make. A brand? That takes strategy. I craft the full visual language — logo, color palette, typography, and usage rules — so you're instantly recognizable everywhere you show up.</p>
+    </div>
+    <div class="svc reveal" style="transition-delay:.16s">
+      <!-- Bar chart icon -->
+      <div class="svc-badge">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#C53D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="12" width="4" height="7" rx="1"/>
+          <rect x="9" y="8"  width="4" height="11" rx="1"/>
+          <rect x="15" y="4" width="4" height="15" rx="1"/>
+          <line x1="1" y1="20" x2="21" y2="20"/>
+        </svg>
+      </div>
+      <span class="svc-num">03</span>
+      <h3>Data Visualization</h3>
+      <p>Numbers that tell a story. I design charts, dashboards, and infographics that make complex data genuinely beautiful — and impossible to ignore. Perfect for reports, pitches, and impact pages.</p>
+    </div>
+    <div class="svc reveal" style="transition-delay:.24s">
+      <!-- Wrench icon -->
+      <div class="svc-badge">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#C53D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.5 2.5a4 4 0 0 1 0 7L7 17a2.12 2.12 0 0 1-3-3l7.5-7.5a4 4 0 0 1 3-4z"/>
+          <circle cx="5.5" cy="16.5" r="1" fill="#C53D2D" stroke="none"/>
+        </svg>
+      </div>
+      <span class="svc-num">04</span>
+      <h3>Ongoing Support</h3>
+      <p>Your website isn't a one-and-done. Monthly care plans keep your site fast, secure, and freshly updated. You run your business — I handle the tech. One message and it's done.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider" aria-hidden="true"><span class="divider-dot"></span></div>
+
+<!-- WORK -->
+<section id="work">
+  <div class="work-header">
+    <div>
+      <div class="stag">Selected work</div>
+      <div class="stitle">Projects that speak<br><strong style="color:var(--red)">for themselves.</strong></div>
+    </div>
+    <a href="#contact" class="work-browse">Start your project &rarr;</a>
+  </div>
+  <div class="work-grid">
+    <div class="work-item reveal">
+      <div class="bg"></div>
+      <div class="work-deco">
+        <svg width="140" height="140" viewBox="0 0 140 140" fill="none">
+          <circle cx="70" cy="70" r="60" stroke="white" stroke-width="4" opacity="0.8"/>
+          <circle cx="70" cy="70" r="40" stroke="white" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.5"/>
+          <circle cx="70" cy="70" r="8" fill="white" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="work-overlay"></div>
+      <div class="work-info">
+        <span class="work-type">Brand Identity</span>
+        <h3>Roast &amp; Pour</h3>
+        <p>Visual identity for a specialty coffee shop</p>
+      </div>
+    </div>
+    <div class="work-item reveal" style="transition-delay:.08s">
+      <div class="bg"></div>
+      <div class="work-deco">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+          <rect x="10" y="10" width="100" height="100" rx="14" stroke="white" stroke-width="4" opacity="0.8"/>
+          <rect x="28" y="28" width="64" height="64" rx="8" stroke="white" stroke-width="2" opacity="0.4"/>
+          <rect x="46" y="46" width="28" height="28" rx="5" fill="white" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="work-overlay"></div>
+      <div class="work-info">
+        <span class="work-type">Data Visualization</span>
+        <h3>Climate Pulse</h3>
+        <p>Interactive environmental data storytelling</p>
+      </div>
+    </div>
+    <div class="work-item reveal" style="transition-delay:.16s">
+      <div class="bg"></div>
+      <div class="work-deco">
+        <svg width="130" height="130" viewBox="0 0 130 130" fill="none">
+          <path d="M65 8 L78 48 L120 48 L87 73 L100 113 L65 88 L30 113 L43 73 L10 48 L52 48 Z" stroke="white" stroke-width="3.5" stroke-linejoin="round" fill="white" fill-opacity="0.1"/>
+        </svg>
+      </div>
+      <div class="work-overlay"></div>
+      <div class="work-info">
+        <span class="work-type">Web Design</span>
+        <h3>Fern &amp; Folio</h3>
+        <p>E-commerce site for an independent bookshop</p>
+      </div>
+    </div>
+    <div class="work-item reveal" style="transition-delay:.24s">
+      <div class="bg"></div>
+      <div class="work-deco">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+          <path d="M60 10 C90 10 110 30 110 60 C110 90 90 110 60 110 C30 110 10 90 10 60 C10 30 30 10 60 10Z" stroke="white" stroke-width="3.5" fill="none" opacity="0.8"/>
+          <path d="M60 30 C78 30 90 44 90 60 C90 76 78 90 60 90 C42 90 30 76 30 60 C30 44 42 30 60 30Z" fill="white" opacity="0.18"/>
+          <circle cx="60" cy="60" r="9" fill="white" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="work-overlay"></div>
+      <div class="work-info">
+        <span class="work-type">Brand Identity</span>
+        <h3>Studio Verdant</h3>
+        <p>Visual identity and brand collateral system</p>
+      </div>
+    </div>
+  </div>
+  <!-- Featured full-width project -->
+  <div class="work-item featured reveal" style="transition-delay:.1s">
+    <div class="bg"></div>
+    <div class="work-deco">
+      <svg width="280" height="120" viewBox="0 0 280 120" fill="none">
+        <path d="M4 60 C24 20 54 100 84 60 C114 20 144 100 174 60 C204 20 234 100 264 60 C270 50 274 55 276 60" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+        <path d="M4 80 C24 50 54 110 84 80 C114 50 144 110 174 80 C204 50 234 110 264 80" stroke="white" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.25"/>
+      </svg>
+    </div>
+    <div class="work-overlay"></div>
+    <div class="work-info">
+      <span class="work-type">Featured Project · Web Design + Branding</span>
+      <h3>Harbor Light Collective — Full brand &amp; digital experience</h3>
+      <p>Logo, visual system, and a custom multi-page website for a Seattle creative co-op</p>
+    </div>
+  </div>
+  <p class="work-note">
+    ✦ &nbsp;Real projects coming soon — meanwhile, here's the vibe. And honestly? The vibe is very good.&nbsp; ✦
+  </p>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider" aria-hidden="true" style="background:var(--ink)"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="stag">About</div>
+  <div class="stitle">The person behind<br>the <strong>pixels.</strong></div>
+  <div class="about-grid">
+    <div class="about-img reveal">
+      <div class="about-img-deco"></div>
+      <div class="about-placeholder">
+        <span class="icon">📸</span>
+        Your photo here
+      </div>
+    </div>
+    <div class="about-text reveal" style="transition-delay:.12s">
+      <h3>I believe small businesses deserve <strong>big-agency quality</strong> — without the big-agency bill.</h3>
+      <p>Most local businesses get stuck choosing between a DIY site that looks like everyone else's, or an agency that charges $15,000 and cc's you on emails instead of actually talking to you.</p>
+      <p>Maneki Studio exists to beckon something better. My background spans three disciplines — web design, brand identity, and data visualization — which means I bring a more complete eye to every project. I see how your story, your data, and your digital presence need to work together to draw the right people in.</p>
+      <p>I also use AI strategically to work faster without cutting corners. That means more time refining the details that actually matter, and shorter turnaround times that don't sacrifice craft. It's an unfair advantage, and I share it with my clients.</p>
+      <div class="stats">
+        <div class="stat">8+ projects delivered</div>
+        <div class="stat">3 disciplines mastered</div>
+        <div class="stat">Seattle → everywhere</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider" aria-hidden="true"><span class="divider-dot"></span></div>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="stag">How it works</div>
+  <div class="stitle">Clear steps.<br><strong>No surprises.</strong></div>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <h4>Discovery Call</h4>
+      <p>We spend 30 minutes talking about your business, your customers, and what's not working online. No jargon, no pressure. You leave with clarity — even if we don't work together.</p>
+    </div>
+    <div class="step reveal" style="transition-delay:.1s">
+      <div class="step-num">02</div>
+      <h4>Design Concept</h4>
+      <p>Within a week, you see a full design direction — colors, typography, layout, the works. You give feedback. We refine together until every detail feels exactly right.</p>
+    </div>
+    <div class="step reveal" style="transition-delay:.2s">
+      <div class="step-num">03</div>
+      <h4>Build &amp; Launch</h4>
+      <p>I build your site clean, fast, and mobile-perfect. You get a walkthrough before we go live. Then we flip the switch together — and you actually feel proud to send people to your URL.</p>
+    </div>
+    <div class="step reveal" style="transition-delay:.3s">
+      <div class="step-num">04</div>
+      <h4>Grow &amp; Support</h4>
+      <p>Optional monthly care plans for updates, security, and performance. Think of it as having a designer on speed dial — without the retainer headaches.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta">
+  <div class="float f1"></div><div class="float f2"></div><div class="float f3"></div><div class="float f4"></div>
+  <div class="cta-inner reveal">
+    <h2>Ready to invite some<br><strong>good fortune in?</strong></h2>
+    <p>Let's build something your competitors wish they'd thought of first.</p>
+    <a href="#contact" class="hero-cta">Get a free quote <span class="arrow">&rarr;</span></a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="stag">Get in touch</div>
+  <div class="stitle">Let's make something<br><strong>together.</strong></div>
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <h3>Every great project starts with a conversation.</h3>
+      <p>Tell me about your business, what you're trying to achieve, and what's been holding you back. I read every message personally and reply within 24 hours.</p>
+      <div class="contact-item"><span class="contact-dot"></span>hello@manekistudio.com</div>
+      <div class="contact-item"><span class="contact-dot"></span>Seattle, WA · Available worldwide</div>
+      <div class="contact-item"><span class="contact-dot"></span>Currently taking new projects</div>
+    </div>
+    <div class="contact-form reveal" style="transition-delay:.12s">
+      <input type="text" placeholder="Your name" autocomplete="name">
+      <input type="email" placeholder="Your email" autocomplete="email">
+      <input type="text" placeholder="Your business name">
+      <textarea placeholder="Tell me about your project — what do you need, and what's the dream outcome?"></textarea>
+      <button type="submit">Send message &rarr;</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <span class="footer-logo">Maneki Studio</span>
+      <span class="footer-copy">&copy; 2026 Maneki Studio. Crafted with care in Seattle.</span>
+    </div>
+    <div class="footer-right">
+      <div class="social-links" aria-label="Social links">
+        <a href="#" class="social-icon" title="Instagram" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" class="social-icon" title="Twitter / X" aria-label="Twitter">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M4 20L20 4"/></svg>
+        </a>
+        <a href="#" class="social-icon" title="LinkedIn" aria-label="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.01M11 17v-4c0-1.1.9-2 2-2s2 .9 2 2v4M11 10v7"/></svg>
+        </a>
+        <a href="#" class="social-icon" title="Dribbble" aria-label="Dribbble">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M6.5 6.5 Q10 14 18 16"/><path d="M15 3 Q13 11 7 17"/></svg>
+        </a>
+      </div>
+      <a href="#home" class="back-to-top">&#8593; Back to top</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+
+// ── CUSTOM CURSOR ──
+const dot = document.getElementById('dot');
+let mx = -100, my = -100, dx = -100, dy = -100;
+const interactables = 'a, button, .svc, .work-item, .social-icon, .back-to-top, input, textarea';
+
+if (!('ontouchstart' in window)) {
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function animate() {
+    dx += (mx - dx) * 0.14;
+    dy += (my - dy) * 0.14;
+    dot.style.left = dx + 'px';
+    dot.style.top  = dy + 'px';
+    requestAnimationFrame(animate);
+  })();
+  document.querySelectorAll(interactables).forEach(el => {
+    el.addEventListener('mouseenter', () => dot.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => dot.classList.remove('hovering'));
+  });
+} else {
+  dot.style.display = 'none';
+  document.body.style.cursor = 'auto';
+}
+
+// ── THEME TOGGLE ──
+const html = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const saved = localStorage.getItem('maneki-theme');
+if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  html.setAttribute('data-theme', 'dark');
+}
+themeToggle.addEventListener('click', () => {
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  localStorage.setItem('maneki-theme', isDark ? 'light' : 'dark');
+});
+
+// ── SCROLL NAV ──
+const nav = document.getElementById('nav');
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, { passive: true });
+
+// ── HAMBURGER / MOBILE DRAWER ──
+const hamburger = document.getElementById('hamburger');
+const drawer    = document.getElementById('drawer');
+const mobLinks  = drawer.querySelectorAll('.mob-link');
+
+function closeDrawer() {
+  hamburger.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  drawer.classList.remove('open');
+  drawer.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', () => {
+  const isOpen = drawer.classList.contains('open');
+  if (isOpen) {
+    closeDrawer();
+  } else {
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    drawer.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+});
+
+mobLinks.forEach(link => link.addEventListener('click', closeDrawer));
+
+// ── SCROLL REVEAL ──
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('vis');
+      revealObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ── SMOOTH SCROLL (supplemental for older browsers) ──
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', e => {
+    const target = document.querySelector(anchor.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ── FORM SUBMIT (no-op, just UX polish) ──
+const btn = document.querySelector('.contact-form button');
+if (btn) {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    const orig = btn.textContent;
+    btn.textContent = 'Sent! ✦';
+    btn.style.background = '#4A7C5A';
+    setTimeout(() => {
+      btn.textContent = orig;
+      btn.style.background = '';
+    }, 3000);
+  });
+}
+
+})();
+</script>
+
+</body>
+</html>
