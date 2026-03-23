@@ -3,41 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; script-src 'unsafe-inline'">
 <title>Tendril Tattoo — Maneki Studio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Cormorant+SC:wght@600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --rice:#F7F5F0;--ink:#1A1714;--red:#C53D2D;--stone:#A39E95;
-  --border:#E8E4DD;--gold:#C4A35A;
-  --display:'Cormorant Garamond',serif;--sc:'Cormorant SC',serif;--sans:'DM Sans',sans-serif;
-}
-[data-theme="dark"]{--rice:#0F0D0B;--ink:#EDE9E3;--stone:#7A746E;--border:#2A2520}
 html{scroll-behavior:smooth}
 body{background:var(--rice);color:var(--ink);font-family:var(--sans);transition:background .3s,color .3s}
 
-/* NAV */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 48px;height:64px;
-  background:var(--rice);border-bottom:1px solid var(--border);
-  transition:background .3s,border-color .3s;
-}
-.nav-logo{font-family:var(--sc);font-size:17px;letter-spacing:.04em;color:var(--ink);text-decoration:none}
-.nav-right{display:flex;align-items:center;gap:24px}
-.back-link{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--stone);text-decoration:none;transition:color .2s}
-.back-link:hover{color:var(--red)}
-.theme-btn{background:none;border:1px solid var(--border);border-radius:50%;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink);font-size:14px;transition:border-color .2s}
-.theme-btn:hover{border-color:var(--stone)}
-
-/* HERO */
 .hero{margin-top:64px;width:100%;height:88vh;overflow:hidden}
 .hero img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
 
-/* PROJECT INFO */
 .project-info{
   display:grid;grid-template-columns:1fr 1fr;
   padding:80px 80px 72px;gap:60px;
@@ -51,10 +27,8 @@ nav{
 .info-right{display:flex;flex-direction:column;justify-content:flex-end;gap:20px}
 .info-right p{font-family:var(--sans);font-size:15px;line-height:1.85;color:var(--stone)}
 
-/* SECTION LABEL */
 .section-label{font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--stone);opacity:.55;display:block;margin-bottom:36px}
 
-/* PUBLICATION */
 .publication{padding:72px 80px 0}
 .pub-flipbook{
   max-width:900px;margin:0 auto;
@@ -66,10 +40,8 @@ nav{
 .pub-flipbook img{
   position:absolute;inset:0;
   width:100%;height:100%;
-  object-fit:contain;
-  object-position:center;
-  display:block;
-  opacity:0;transition:opacity .08s;
+  object-fit:contain;object-position:center;
+  display:block;opacity:0;transition:opacity .08s;
 }
 .pub-flipbook img.active{opacity:1}
 .pub-flipbook-hint{
@@ -78,7 +50,6 @@ nav{
   text-transform:uppercase;color:var(--stone);opacity:.45;
 }
 
-/* PACKAGING */
 .packaging{padding:72px 80px;background:#0E0C0A;margin-top:72px}
 .packaging .section-label{color:#555;opacity:1}
 .packaging-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;align-items:end}
@@ -86,31 +57,23 @@ nav{
 .pkg-item img{width:100%;max-width:260px;height:auto;display:block}
 .pkg-name{font-family:var(--sans);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#555;text-align:center}
 
-/* BRAND */
 .brand{display:grid;grid-template-columns:1fr 1fr;margin-top:1px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .brand-item{padding:64px 80px;display:flex;flex-direction:column;gap:24px}
 .brand-item:first-child{border-right:1px solid var(--border)}
 .brand-item img{width:100%;max-width:360px;height:auto;display:block}
 .brand-item-label{font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--stone);opacity:.55}
 
-/* LIFESTYLE */
 .lifestyle{padding:72px 80px}
 .lifestyle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .lifestyle-grid img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:4px}
 .lifestyle-grid .wide{grid-column:span 2;aspect-ratio:16/9}
 
-/* EXHIBITION */
 .exhibition img{width:100%;height:auto;display:block}
 .exhibition img+img{margin-top:3px}
 
-/* FOOTER */
-.project-footer{padding:48px 80px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.project-footer a{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.5px;color:var(--stone);text-decoration:none;transition:color .2s}
-.project-footer a:hover{color:var(--red)}
 .next-label{display:block;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--stone);opacity:.5;margin-bottom:6px}
 
 @media(max-width:900px){
-  nav{padding:0 24px}
   .hero{height:60vw;min-height:280px}
   .project-info{grid-template-columns:1fr;padding:48px 24px;gap:32px}
   .publication{padding:56px 24px 0}
@@ -122,9 +85,11 @@ nav{
   .lifestyle{padding:48px 24px}
   .lifestyle-grid{grid-template-columns:1fr 1fr}
   .lifestyle-grid .wide{grid-column:span 2}
-  .project-footer{padding:40px 24px;flex-direction:column;gap:20px;text-align:center}
 }
 </style>
+<script>
+(function(){var t=localStorage.getItem('maneki-theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+</script>
 </head>
 <body>
 
@@ -136,12 +101,10 @@ nav{
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
-  <img src="images/tendril/framer-01.jpg" alt="Tendril Tattoo product collection on purple background">
+  <img src="images/tendril/framer-01.webp" alt="Tendril Tattoo product collection on purple background" width="1800" height="1200" fetchpriority="high">
 </div>
 
-<!-- PROJECT INFO -->
 <section class="project-info">
   <div>
     <span class="project-eyebrow">Brand Identity · Exhibition Design</span>
@@ -158,76 +121,70 @@ nav{
   </div>
 </section>
 
-<!-- PUBLICATION -->
 <div class="publication">
   <span class="section-label">The Publication</span>
   <div class="pub-flipbook" id="pubFlipbook">
-    <img src="images/tendril/Publication Better/Frame 1.png" alt="Publication frame 1" class="active">
-    <img src="images/tendril/Publication Better/Frame 2.png" alt="Publication frame 2">
-    <img src="images/tendril/Publication Better/Frame 3.png" alt="Publication frame 3">
-    <img src="images/tendril/Publication Better/Frame 4.png" alt="Publication frame 4">
-    <img src="images/tendril/Publication Better/Frame 5.png" alt="Publication frame 5">
-    <img src="images/tendril/Publication Better/Frame 6.png" alt="Publication frame 6">
-    <img src="images/tendril/Publication Better/Frame 7.png" alt="Publication frame 7">
-    <img src="images/tendril/Publication Better/Frame 8.png" alt="Publication frame 8">
-    <img src="images/tendril/Publication Better/Frame 9.png" alt="Publication frame 9">
-    <img src="images/tendril/Publication Better/Frame 10.png" alt="Publication frame 10">
-    <img src="images/tendril/Publication Better/Frame 11.png" alt="Publication frame 11">
+    <img src="images/tendril/publication/Frame 1.webp" alt="Publication frame 1" class="active" width="1800" height="1200">
+    <img src="images/tendril/publication/Frame 2.webp" alt="Publication frame 2" width="1800" height="1200" loading="lazy">
+    <img src="images/tendril/publication/Frame 3.webp" alt="Publication frame 3" width="1800" height="1200" loading="lazy">
+    <img src="images/tendril/publication/Frame 4.webp" alt="Publication frame 4" width="1800" height="1200" loading="lazy">
+    <img src="images/tendril/publication/Frame 5.webp" alt="Publication frame 5" width="1800" height="1200" loading="lazy">
+    <img src="images/tendril/publication/Frame 6.webp" alt="Publication frame 6" width="1800" height="1200" loading="lazy">
+    <img src="images/tendril/publication/Frame 7.webp" alt="Publication frame 7" width="1800" height="1200" loading="lazy">
+    <img src="images/tendril/publication/Frame 8.webp" alt="Publication frame 8" width="1800" height="1200" loading="lazy">
+    <img src="images/tendril/publication/Frame 9.webp" alt="Publication frame 9" width="1800" height="1200" loading="lazy">
+    <img src="images/tendril/publication/Frame 10.webp" alt="Publication frame 10" width="1800" height="1200" loading="lazy">
+    <img src="images/tendril/publication/Frame 11.webp" alt="Publication frame 11" width="1800" height="1200" loading="lazy">
   </div>
   <p class="pub-flipbook-hint">Click to pause · auto-advancing</p>
 </div>
 
-<!-- PACKAGING -->
 <div class="packaging">
   <span class="section-label">Product Line</span>
   <div class="packaging-grid">
     <div class="pkg-item">
-      <img src="images/tendril/dropped assets/image 177.png" alt="Sun Veil tattoo sunscreen">
+      <img src="images/tendril/assets/image 177.webp" alt="Sun Veil tattoo sunscreen" width="700" height="auto" loading="lazy">
       <span class="pkg-name">Sun Veil</span>
     </div>
     <div class="pkg-item">
-      <img src="images/tendril/dropped assets/image 178.png" alt="Tattoo Soap">
+      <img src="images/tendril/assets/image 178.webp" alt="Tattoo Soap" width="700" height="auto" loading="lazy">
       <span class="pkg-name">Tattoo Soap</span>
     </div>
     <div class="pkg-item">
-      <img src="images/tendril/dropped assets/image 179.png" alt="Aftercare Balm">
+      <img src="images/tendril/assets/image 179.webp" alt="Aftercare Balm" width="700" height="auto" loading="lazy">
       <span class="pkg-name">Aftercare Balm</span>
     </div>
   </div>
 </div>
 
-<!-- BRAND IDENTITY -->
 <div class="brand">
   <div class="brand-item">
     <span class="brand-item-label">Wordmark</span>
-    <img src="images/tendril/dropped assets/ss1.png" alt="Tendril wordmark">
+    <img src="images/tendril/assets/ss1.webp" alt="Tendril wordmark" width="313" height="216" loading="lazy">
   </div>
   <div class="brand-item">
     <span class="brand-item-label">Business Card</span>
-    <img src="images/tendril/dropped assets/ss2.png" alt="Tendril business card">
+    <img src="images/tendril/assets/ss2.webp" alt="Tendril business card" width="270" height="248" loading="lazy">
   </div>
 </div>
 
-<!-- LIFESTYLE PHOTOGRAPHY -->
 <div class="lifestyle">
   <span class="section-label">Campaign Photography</span>
   <div class="lifestyle-grid">
-    <img src="images/tendril/photo-1.jpg" alt="Two models wearing Tendril t-shirts at night">
-    <img src="images/tendril/photo-3.jpg" alt="Model showing Tendril sigil on t-shirt">
-    <img src="images/tendril/framer-04.jpg" alt="Tendril products in a wildflower field" class="wide">
-    <img src="images/tendril/photo-5.jpg" alt="Woman in Tendril t-shirt at night">
-    <img src="images/tendril/photo-2.jpg" alt="Couple in grass wearing Tendril merch">
-    <img src="images/tendril/photo-4.jpg" alt="Two people in Tendril apparel in grass">
+    <img src="images/tendril/photo-1.webp" alt="Two models wearing Tendril t-shirts at night" width="1200" height="1800" loading="lazy">
+    <img src="images/tendril/photo-3.webp" alt="Model showing Tendril sigil on t-shirt" width="1200" height="900" loading="lazy">
+    <img src="images/tendril/framer-04.webp" alt="Tendril products in a wildflower field" class="wide" width="1800" height="1350" loading="lazy">
+    <img src="images/tendril/photo-5.webp" alt="Woman in Tendril t-shirt at night" width="1200" height="900" loading="lazy">
+    <img src="images/tendril/photo-2.webp" alt="Couple in grass wearing Tendril merch" width="1200" height="1800" loading="lazy">
+    <img src="images/tendril/photo-4.webp" alt="Two people in Tendril apparel in grass" width="1200" height="900" loading="lazy">
   </div>
 </div>
 
-<!-- EXHIBITION -->
 <div class="exhibition">
-  <img src="images/tendril/dropped assets/DesignShow_2025-1762 1.png" alt="Tendril exhibition at UW 2025 Senior Design Show">
-  <img src="images/tendril/framer-05.jpg" alt="Tendril exhibition space with purple walls">
+  <img src="images/tendril/assets/DesignShow_2025-1762 1.webp" alt="Tendril exhibition at UW 2025 Senior Design Show" width="1600" height="1067" loading="lazy">
+  <img src="images/tendril/framer-05.webp" alt="Tendril exhibition space with purple walls" width="1400" height="1050" loading="lazy">
 </div>
 
-<!-- FOOTER -->
 <div class="project-footer">
   <a href="index.html#work">← Back to all work</a>
   <div style="text-align:right">
@@ -242,24 +199,24 @@ const flipbook = document.getElementById('pubFlipbook');
 const frames = flipbook.querySelectorAll('img');
 const hint = flipbook.nextElementSibling;
 let current = 0, playing = true;
-let timer = setInterval(advance, 900);
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let timer = prefersReduced ? null : setInterval(advance, 900);
+if(prefersReduced) hint.textContent = 'Click to play';
+
 function advance() {
   frames[current].classList.remove('active');
   current = (current + 1) % frames.length;
   frames[current].classList.add('active');
 }
 flipbook.addEventListener('click', () => {
-  if (playing) { clearInterval(timer); hint.textContent = 'Click to play · paused'; }
-  else { timer = setInterval(advance, 900); hint.textContent = 'Click to pause · auto-advancing'; }
-  playing = !playing;
+  if(playing){clearInterval(timer);hint.textContent='Click to play · paused';}
+  else{timer=setInterval(advance,900);hint.textContent='Click to pause · auto-advancing';}
+  playing=!playing;
 });
 
 const btn = document.getElementById('themeBtn');
-const saved = localStorage.getItem('maneki-theme');
-if(saved) document.documentElement.setAttribute('data-theme', saved);
 btn.addEventListener('click', () => {
-  const cur = document.documentElement.getAttribute('data-theme');
-  const next = cur === 'dark' ? 'light' : 'dark';
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('maneki-theme', next);
 });
