@@ -258,48 +258,58 @@ section{padding:140px 64px}
 
 /* ── SERVICES ── */
 #services{padding-top:110px}
-.services-intro{
-  display:flex;justify-content:space-between;align-items:flex-end;gap:48px;margin-bottom:64px;flex-wrap:wrap;
+.services-header{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding-bottom:32px;border-bottom:1px solid var(--border);
+  margin-bottom:0;
 }
-.services-intro .stitle{margin-bottom:0;max-width:620px}
-.services-intro-note{
-  font-family:var(--sans);font-size:16px;color:var(--stone);
-  line-height:1.75;max-width:280px;font-weight:400;
+.services-header .stag{margin-bottom:0}
+.services-talk{
+  font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:2px;
+  text-transform:uppercase;color:var(--stone);text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;transition:color .2s;
 }
-.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.svc{
-  background:var(--card);border:1px solid var(--border);border-radius:20px;
-  padding:44px 40px;position:relative;overflow:hidden;
-  transition:transform .3s cubic-bezier(.4,0,.2,1),border-color .3s,box-shadow .3s;
-  cursor:none;
+.services-talk:hover{color:var(--red)}
+.svc-list{list-style:none;margin:0;padding:0}
+.svc-row{
+  display:grid;grid-template-columns:72px 1fr 32px;
+  align-items:center;padding:28px 0;
+  border-bottom:1px solid var(--border);
+  cursor:none;transition:opacity .4s ease;
 }
-.svc::after{
-  content:'';position:absolute;bottom:0;left:36px;
-  width:0;height:2px;border-radius:2px;background:var(--red);
-  transition:width .4s cubic-bezier(.4,0,.2,1);
+.svc-list:hover .svc-row{opacity:.18}
+.svc-list:hover .svc-row:hover{opacity:1}
+.svc-row-num{
+  font-family:var(--sans);font-size:11px;font-weight:500;
+  letter-spacing:2.5px;color:var(--stone);align-self:start;padding-top:14px;
 }
-.svc:hover::after{width:calc(100% - 72px)}
-.svc:hover{transform:translateY(-3px);border-color:rgba(197,61,45,.25);box-shadow:0 12px 36px rgba(26,23,20,.06)}
-.svc-badge{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:48px;height:48px;border-radius:12px;margin-bottom:28px;
-  background:rgba(197,61,45,0.08);border:1px solid rgba(197,61,45,0.15);
-  position:relative;
+.svc-row-body{
+  display:flex;flex-direction:column;align-items:center;
 }
-.svc-badge::after{
-  content:'';position:absolute;bottom:-4px;right:-4px;
-  width:9px;height:9px;border-radius:50%;background:var(--red);
-  border:2px solid var(--rice);
-  transform:scale(0);transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+.svc-row-title{
+  font-family:var(--display);font-style:italic;font-weight:400;
+  font-size:clamp(32px,5.5vw,76px);
+  line-height:1;letter-spacing:-1.5px;
+  color:var(--ink);text-align:center;
+  transition:font-weight .2s,letter-spacing .2s;
 }
-.svc:hover .svc-badge::after{transform:scale(1)}
-.svc h3{font-family:var(--sans);font-size:20px;font-weight:600;margin-bottom:12px;letter-spacing:-0.2px}
-.svc p{font-family:var(--sans);font-size:15px;color:var(--stone);line-height:1.75}
-.svc-num{
-  position:absolute;top:36px;right:36px;
-  font-family:var(--display);font-style:italic;font-size:52px;font-weight:400;
-  color:var(--border);line-height:1;letter-spacing:-1px;
+.svc-row:hover .svc-row-title{font-weight:700;letter-spacing:-2px}
+.svc-row-desc{
+  font-family:var(--sans);font-size:14px;color:var(--stone);
+  line-height:1.65;text-align:center;max-width:520px;
+  max-height:0;overflow:hidden;opacity:0;
+  transform:translateY(-6px);margin-top:0;
+  transition:max-height .4s ease,opacity .35s ease,transform .35s ease,margin-top .35s ease;
 }
+.svc-row:hover .svc-row-desc{
+  max-height:80px;opacity:1;transform:translateY(0);margin-top:12px;
+}
+.svc-row-arrow{
+  color:var(--red);font-size:22px;text-align:right;align-self:start;padding-top:10px;
+  opacity:0;transform:translateX(-6px);
+  transition:opacity .3s,transform .3s;
+}
+.svc-row:hover .svc-row-arrow{opacity:1;transform:translateX(0)}
 
 /* ── WORK ── */
 #work{background:var(--ink);color:var(--rice);padding:140px 64px}
@@ -317,7 +327,7 @@ section{padding:140px 64px}
 .work-browse:hover{color:var(--red);border-color:var(--red)}
 .work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:14px}
 .work-item{
-  border-radius:20px;overflow:hidden;position:relative;
+  border-radius:6px;overflow:hidden;position:relative;
   aspect-ratio:16/11;cursor:none;
 }
 .work-item.featured{
@@ -376,45 +386,33 @@ section{padding:140px 64px}
 .work-note{
   text-align:center;margin-top:8px;padding:20px;
   color:rgba(247,245,240,.2);font-size:14px;font-family:var(--sans);
-  border:1px dashed rgba(247,245,240,.09);border-radius:14px;line-height:1.6;font-style:italic;
+  border:1px dashed rgba(247,245,240,.09);border-radius:4px;line-height:1.6;font-style:italic;
 }
 
 /* ── ABOUT ── */
 #about{background:var(--rice);padding-top:140px}
-.about-grid{display:grid;grid-template-columns:5fr 7fr;gap:80px;margin-top:64px;align-items:center}
-.about-img{
-  aspect-ratio:3/4;border-radius:24px;position:relative;overflow:hidden;
-  background:linear-gradient(145deg,#EDE8E1 0%,#D8D3CD 100%);
-  display:flex;align-items:center;justify-content:center;
-}
-.about-img-deco{
-  position:absolute;bottom:-20px;right:-20px;
-  width:100px;height:100px;background:var(--red);
-  border-radius:50%;opacity:.1;
-}
-.about-placeholder{text-align:center;color:var(--stone);font-size:14px;z-index:1;font-family:var(--sans)}
-.about-placeholder .icon{font-size:44px;display:block;margin-bottom:12px}
-.about-text h3{
+.phil-layout{margin-top:56px;max-width:680px}
+.phil-statement{
   font-family:var(--display);font-style:italic;font-weight:400;
-  font-size:clamp(26px,3vw,35px);margin-bottom:24px;line-height:1.22;letter-spacing:-0.3px;
+  font-size:clamp(26px,3vw,36px);line-height:1.2;letter-spacing:-0.3px;
+  color:var(--ink);margin-bottom:28px;
 }
-.about-text h3 strong{font-family:var(--display);font-weight:700;font-style:italic}
-.about-text p{
-  font-family:var(--sans);font-size:16px;color:var(--stone);
-  line-height:1.85;margin-bottom:18px;
+.phil-bio{
+  font-family:var(--sans);font-size:15px;color:var(--stone);
+  line-height:1.85;margin-bottom:32px;max-width:540px;
 }
-.about-text p:last-of-type{margin-bottom:0}
-.stats{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
-.stat{
-  padding:11px 22px;border-radius:100px;
-  font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:-0.1px;
-  border:1.5px solid var(--border);background:transparent;color:var(--ink);
+.phil-caps{display:flex;flex-wrap:wrap;gap:8px}
+.phil-caps span{
+  font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--stone);
+  border:1px solid var(--border);border-radius:3px;
+  padding:6px 14px;
 }
-.stat:nth-child(1){border-color:var(--red);color:var(--red)}
+.phil-loc{font-family:var(--sans);font-size:12px;color:var(--stone);opacity:.45;margin-top:24px;letter-spacing:.5px}
 
 /* ── PROCESS ── */
 #process{
-  background:#F0EDE6;border-radius:36px;margin:0 24px;
+  background:#F0EDE6;border-radius:10px;margin:0 24px;
   padding:100px 72px;
 }
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:64px}
@@ -475,7 +473,7 @@ section{padding:140px 64px}
 .contact-form{display:flex;flex-direction:column;gap:11px}
 .contact-form input,.contact-form textarea{
   font-family:var(--sans);font-size:15px;padding:15px 20px;
-  border:1px solid var(--border);border-radius:14px;
+  border:1px solid var(--border);border-radius:4px;
   background:var(--card);color:var(--ink);outline:none;
   transition:border-color .2s,border-left-width .2s,padding-left .2s;
   border-left:3px solid transparent;
@@ -568,16 +566,16 @@ footer{
   .hero h1{letter-spacing:-1.5px}
   .doodles{opacity:.35;width:100%;top:auto;bottom:60px;left:0}
   .doodle-cat-wm,.doodle-dots{display:none}
-  .services-intro{flex-direction:column;align-items:flex-start;gap:20px}
-  .services-intro-note{max-width:100%}
-  .services-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
-  .about-grid{gap:40px}
+  .svc-row{grid-template-columns:36px 1fr 20px;padding:20px 0}
+  .svc-row-num{font-size:10px;padding-top:10px}
+  .svc-row-arrow{font-size:14px;padding-top:8px}
+  .svc-row-desc{font-size:13px}
   .contact-grid{gap:40px}
   .work-grid{grid-template-columns:1fr}
   .work-item.featured{aspect-ratio:4/3}
   .steps{grid-template-columns:repeat(2,1fr);gap:24px}
   .step::after{display:none}
-  #process{margin:0 12px;padding:60px 28px;border-radius:24px}
+  #process{margin:0 12px;padding:60px 28px;border-radius:8px}
   .cta{padding:90px 24px}
   .divider{margin:0 24px}
   footer{padding:28px 24px}
@@ -676,7 +674,7 @@ footer{
     Available for new projects
   </div>
   <h1>Websites that bring your<br>business <strong>good fortune.</strong></h1>
-  <p class="hero-sub">I design refined, strategic digital experiences for businesses ready to make a real impression. No templates. No shortcuts. Just craft.</p>
+  <p class="hero-sub">I design websites and visual identities for businesses that want something considered — built to actually represent them, not just to exist online.</p>
   <div class="hero-actions">
     <a href="#contact" class="hero-cta">Start a project <span class="arrow">&rarr;</span></a>
     <a href="#work" class="hero-ghost">See the work</a>
@@ -741,66 +739,52 @@ footer{
 
 <!-- SERVICES -->
 <section id="services">
-  <div class="services-intro">
-    <div>
-      <div class="stag">What I do</div>
-      <div class="stitle">Design that brings customers<br><strong>to your door.</strong></div>
-    </div>
-    <p class="services-intro-note">Everything your business needs to look credible, get found, and turn visitors into actual customers.</p>
+  <div class="services-header">
+    <div class="stag">What I do</div>
+    <a href="#contact" class="services-talk">Start a project &rarr;</a>
   </div>
-  <div class="services-grid">
-    <div class="svc reveal">
-      <!-- Browser window icon -->
-      <div class="svc-badge">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#C53D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="4" width="18" height="14" rx="2"/>
-          <line x1="2" y1="8" x2="20" y2="8"/>
-          <circle cx="5.5" cy="6" r="0.8" fill="#C53D2D" stroke="none"/>
-          <circle cx="8.5" cy="6" r="0.8" fill="#C53D2D" stroke="none"/>
-        </svg>
+  <ul class="svc-list" role="list">
+    <li class="svc-row">
+      <span class="svc-row-num">01</span>
+      <div class="svc-row-body">
+        <span class="svc-row-title">Website Design</span>
+        <p class="svc-row-desc">Custom-built sites that load fast, look stunning on every screen, and are designed around one goal — converting visitors into customers.</p>
       </div>
-      <span class="svc-num">01</span>
-      <h3>Website Design</h3>
-      <p>Custom-built sites that load in under two seconds, look stunning on every device, and are designed around one goal — converting visitors into customers. No templates. No shortcuts.</p>
-    </div>
-    <div class="svc reveal" style="transition-delay:.08s">
-      <!-- Hexagon icon -->
-      <div class="svc-badge">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#C53D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="11,2 19.66,6.5 19.66,15.5 11,20 2.34,15.5 2.34,6.5"/>
-        </svg>
+      <span class="svc-row-arrow" aria-hidden="true">&rarr;</span>
+    </li>
+    <li class="svc-row">
+      <span class="svc-row-num">02</span>
+      <div class="svc-row-body">
+        <span class="svc-row-title">Brand Identity</span>
+        <p class="svc-row-desc">Your full visual language — logo, colour, typography, and usage rules — so you're instantly recognizable everywhere you show up.</p>
       </div>
-      <span class="svc-num">02</span>
-      <h3>Brand Identity</h3>
-      <p>A logo anyone could make. A brand? That takes strategy. I craft the full visual language — logo, color palette, typography, and usage rules — so you're instantly recognizable everywhere you show up.</p>
-    </div>
-    <div class="svc reveal" style="transition-delay:.16s">
-      <!-- Bar chart icon -->
-      <div class="svc-badge">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#C53D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="12" width="4" height="7" rx="1"/>
-          <rect x="9" y="8"  width="4" height="11" rx="1"/>
-          <rect x="15" y="4" width="4" height="15" rx="1"/>
-          <line x1="1" y1="20" x2="21" y2="20"/>
-        </svg>
+      <span class="svc-row-arrow" aria-hidden="true">&rarr;</span>
+    </li>
+    <li class="svc-row">
+      <span class="svc-row-num">03</span>
+      <div class="svc-row-body">
+        <span class="svc-row-title">Logos &amp; Graphics</span>
+        <p class="svc-row-desc">Marks, icon systems, and print-ready graphics that look sharp at every size — from a favicon to a full-face billboard.</p>
       </div>
-      <span class="svc-num">03</span>
-      <h3>Data Visualization</h3>
-      <p>Numbers that tell a story. I design charts, dashboards, and infographics that make complex data genuinely beautiful — and impossible to ignore. Perfect for reports, pitches, and impact pages.</p>
-    </div>
-    <div class="svc reveal" style="transition-delay:.24s">
-      <!-- Wrench icon -->
-      <div class="svc-badge">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#C53D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14.5 2.5a4 4 0 0 1 0 7L7 17a2.12 2.12 0 0 1-3-3l7.5-7.5a4 4 0 0 1 3-4z"/>
-          <circle cx="5.5" cy="16.5" r="1" fill="#C53D2D" stroke="none"/>
-        </svg>
+      <span class="svc-row-arrow" aria-hidden="true">&rarr;</span>
+    </li>
+    <li class="svc-row">
+      <span class="svc-row-num">04</span>
+      <div class="svc-row-body">
+        <span class="svc-row-title">Data Visualization</span>
+        <p class="svc-row-desc">Charts, dashboards, and infographics that make complex data genuinely beautiful — and impossible to ignore.</p>
       </div>
-      <span class="svc-num">04</span>
-      <h3>Ongoing Support</h3>
-      <p>Your website isn't a one-and-done. Monthly care plans keep your site fast, secure, and freshly updated. You run your business — I handle the tech. One message and it's done.</p>
-    </div>
-  </div>
+      <span class="svc-row-arrow" aria-hidden="true">&rarr;</span>
+    </li>
+    <li class="svc-row">
+      <span class="svc-row-num">05</span>
+      <div class="svc-row-body">
+        <span class="svc-row-title">Ongoing Support</span>
+        <p class="svc-row-desc">Monthly care plans to keep your site fast, secure, and freshly updated. You run your business — I handle the tech.</p>
+      </div>
+      <span class="svc-row-arrow" aria-hidden="true">&rarr;</span>
+    </li>
+  </ul>
 </section>
 
 <!-- DIVIDER -->
@@ -836,7 +820,7 @@ footer{
       </div>
     </a>
     <a href="randamu.html" class="work-item reveal" style="transition-delay:.16s;text-decoration:none">
-      <div class="bg" style="background:linear-gradient(135deg,#0d2580 0%,#12339E 60%,#1a3fb5 100%)"></div>
+      <div class="bg" style="background-image:url('images/randamu/main-dark.webp');background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#0d1a4a"></div>
       <div class="work-overlay"></div>
       <div class="work-info">
         <span class="work-type">Brand Identity</span>
@@ -844,42 +828,16 @@ footer{
         <p>Identity system for a distributed randomness beacon</p>
       </div>
     </a>
-    <div class="work-item reveal" style="transition-delay:.24s">
-      <div class="bg"></div>
-      <div class="work-deco">
-        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-          <path d="M60 10 C90 10 110 30 110 60 C110 90 90 110 60 110 C30 110 10 90 10 60 C10 30 30 10 60 10Z" stroke="white" stroke-width="3.5" fill="none" opacity="0.8"/>
-          <path d="M60 30 C78 30 90 44 90 60 C90 76 78 90 60 90 C42 90 30 76 30 60 C30 44 42 30 60 30Z" fill="white" opacity="0.18"/>
-          <circle cx="60" cy="60" r="9" fill="white" opacity="0.4"/>
-        </svg>
-      </div>
+    <a href="mopop.html" class="work-item reveal" style="transition-delay:.24s;text-decoration:none">
+      <div class="bg" style="background-image:url('images/mopop/billboard.webp');background-size:cover;background-position:center"></div>
       <div class="work-overlay"></div>
       <div class="work-info">
-        <span class="work-type">Brand Identity</span>
-        <h3>Studio Verdant</h3>
-        <p>Visual identity and brand collateral system</p>
+        <span class="work-type">Logos &amp; Graphics · Icon Design</span>
+        <h3>MoPOP Symbol Set</h3>
+        <p>Custom symbol system for the Museum of Pop Culture in Seattle</p>
       </div>
-    </div>
+    </a>
   </div>
-  <!-- Featured full-width project -->
-  <div class="work-item featured reveal" style="transition-delay:.1s">
-    <div class="bg"></div>
-    <div class="work-deco">
-      <svg width="280" height="120" viewBox="0 0 280 120" fill="none">
-        <path d="M4 60 C24 20 54 100 84 60 C114 20 144 100 174 60 C204 20 234 100 264 60 C270 50 274 55 276 60" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.6"/>
-        <path d="M4 80 C24 50 54 110 84 80 C114 50 144 110 174 80 C204 50 234 110 264 80" stroke="white" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.25"/>
-      </svg>
-    </div>
-    <div class="work-overlay"></div>
-    <div class="work-info">
-      <span class="work-type">Featured Project · Web Design + Branding</span>
-      <h3>Harbor Light Collective — Full brand &amp; digital experience</h3>
-      <p>Logo, visual system, and a custom multi-page website for a Seattle creative co-op</p>
-    </div>
-  </div>
-  <p class="work-note">
-    ✦ &nbsp;More projects coming soon.&nbsp; ✦
-  </p>
 </section>
 
 <!-- DIVIDER -->
@@ -887,26 +845,21 @@ footer{
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="stag">About</div>
-  <div class="stitle">The person behind<br>the <strong>pixels.</strong></div>
-  <div class="about-grid">
-    <div class="about-img reveal">
-      <div class="about-img-deco"></div>
-      <div class="about-placeholder">
-        <span class="icon">📸</span>
-        Your photo here
+  <div class="stag">My Philosophy</div>
+  <div class="stitle">Design that's made<br>to <strong>mean something.</strong></div>
+  <div class="phil-layout">
+    <div class="phil-main reveal">
+      <p class="phil-statement">I think the best work is the kind that feels inevitable — where the graphics are beautiful and the thinking behind them is just as considered.</p>
+      <p class="phil-bio">I graduated from the University of Washington in 2025 with a background across brand identity, web design, data visualization, and exhibition design. I take on projects where craft matters and the details get to breathe.</p>
+      <div class="phil-caps">
+        <span>Web Design</span>
+        <span>Brand Identity</span>
+        <span>Logos &amp; Graphics</span>
+        <span>Data Visualization</span>
+        <span>Exhibition Design</span>
+        <span>Print</span>
       </div>
-    </div>
-    <div class="about-text reveal" style="transition-delay:.12s">
-      <h3>I believe small businesses deserve <strong>big-agency quality</strong> — without the big-agency bill.</h3>
-      <p>Most local businesses get stuck choosing between a DIY site that looks like everyone else's, or an agency that charges $15,000 and cc's you on emails instead of actually talking to you.</p>
-      <p>Maneki Studio exists to beckon something better. My background spans three disciplines — web design, brand identity, and data visualization — which means I bring a more complete eye to every project. I see how your story, your data, and your digital presence need to work together to draw the right people in.</p>
-      <p>I also use AI strategically to work faster without cutting corners. That means more time refining the details that actually matter, and shorter turnaround times that don't sacrifice craft. It's an unfair advantage, and I share it with my clients.</p>
-      <div class="stats">
-        <div class="stat">8+ projects delivered</div>
-        <div class="stat">3 disciplines mastered</div>
-        <div class="stat">Seattle → everywhere</div>
-      </div>
+      <p class="phil-loc">Based in Seattle, WA</p>
     </div>
   </div>
 </section>
