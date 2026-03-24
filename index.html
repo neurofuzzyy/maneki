@@ -741,6 +741,7 @@ footer{
 <section id="services">
   <div class="services-header">
     <div class="stag">What I do</div>
+    <a href="#pricing" class="services-talk">View pricing &darr;</a>
     <a href="#contact" class="services-talk">Start a project &rarr;</a>
   </div>
   <ul class="svc-list" role="list">
@@ -785,6 +786,81 @@ footer{
       <span class="svc-row-arrow" aria-hidden="true">&rarr;</span>
     </li>
   </ul>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider" aria-hidden="true"><span class="divider-dot"></span></div>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="pricing-header">
+    <div class="stag">Investment</div>
+    <a href="#contact" class="services-talk">Get a custom quote &rarr;</a>
+  </div>
+  <div class="pricing-grid">
+
+    <div class="pricing-card reveal">
+      <div class="pricing-card-top">
+        <span class="pricing-tier">Landing Page</span>
+        <div class="pricing-price">
+          <span class="pricing-from">from</span>
+          <span class="pricing-num">$1,500</span>
+        </div>
+        <p class="pricing-desc">For businesses that need a clean, fast presence online — one page, one goal, done right.</p>
+      </div>
+      <ul class="pricing-includes">
+        <li>Single-page responsive site</li>
+        <li>Hero, services, contact sections</li>
+        <li>Domain + hosting setup</li>
+        <li>2 rounds of revisions</li>
+        <li>Launch walkthrough</li>
+      </ul>
+      <a href="#contact" class="pricing-cta">Get started &rarr;</a>
+    </div>
+
+    <div class="pricing-card pricing-card--featured reveal" style="transition-delay:.1s">
+      <div class="pricing-featured-label">Most popular</div>
+      <div class="pricing-card-top">
+        <span class="pricing-tier">Multi-page Site</span>
+        <div class="pricing-price">
+          <span class="pricing-from">from</span>
+          <span class="pricing-num">$2,800</span>
+        </div>
+        <p class="pricing-desc">A full website built around your business — the kind that makes people stay, explore, and reach out.</p>
+      </div>
+      <ul class="pricing-includes">
+        <li>5–7 custom pages</li>
+        <li>Mobile-perfect on every screen</li>
+        <li>Domain + hosting setup</li>
+        <li>2 rounds of revisions</li>
+        <li>Launch walkthrough</li>
+        <li>30 days post-launch support</li>
+      </ul>
+      <a href="#contact" class="pricing-cta pricing-cta--light">Get started &rarr;</a>
+    </div>
+
+    <div class="pricing-card reveal" style="transition-delay:.2s">
+      <div class="pricing-card-top">
+        <span class="pricing-tier">Full Site + Brand</span>
+        <div class="pricing-price">
+          <span class="pricing-from">from</span>
+          <span class="pricing-num">$4,800</span>
+        </div>
+        <p class="pricing-desc">Everything in Multi-page, plus a complete visual identity — logo, colour, type, and brand guidelines.</p>
+      </div>
+      <ul class="pricing-includes">
+        <li>Everything in Multi-page</li>
+        <li>Logo design</li>
+        <li>Colour palette + typography</li>
+        <li>Brand guidelines document</li>
+        <li>Print-ready files</li>
+        <li>30 days post-launch support</li>
+      </ul>
+      <a href="#contact" class="pricing-cta">Get started &rarr;</a>
+    </div>
+
+  </div>
+  <p class="pricing-note reveal">All projects include a free 30-minute discovery call. No jargon, no pressure — just a conversation about what you need.</p>
 </section>
 
 <!-- DIVIDER -->
@@ -845,21 +921,21 @@ footer{
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="stag">My Philosophy</div>
-  <div class="stitle">Design that's made<br>to <strong>mean something.</strong></div>
+  <div class="stag">About</div>
+  <div class="stitle">Design that works<br>as hard as <strong>you do.</strong></div>
   <div class="phil-layout">
     <div class="phil-main reveal">
-      <p class="phil-statement">I think the best work is the kind that feels inevitable — where the graphics are beautiful and the thinking behind them is just as considered.</p>
-      <p class="phil-bio">I graduated from the University of Washington in 2025 with a background across brand identity, web design, data visualization, and exhibition design. I take on projects where craft matters and the details get to breathe.</p>
+      <p class="phil-statement">Most small businesses deserve a better website than they have. I'm here to fix that — without the agency price tag.</p>
+      <p class="phil-bio">I'm Emily, a Seattle-based designer with a degree from the University of Washington and a background in brand identity, web design, and visual systems. I started Maneki Studio because I kept seeing local businesses with outdated sites, no sites, or sites that looked like everyone else's. You've put years into your business. Your website should show it.</p>
+      <p class="phil-bio">Every project I take on is built from scratch around your business — not dropped into a template. I handle the design, the build, and the launch. You stay focused on what you actually do.</p>
       <div class="phil-caps">
         <span>Web Design</span>
         <span>Brand Identity</span>
         <span>Logos &amp; Graphics</span>
         <span>Data Visualization</span>
-        <span>Exhibition Design</span>
         <span>Print</span>
       </div>
-      <p class="phil-loc">Based in Seattle, WA</p>
+      <p class="phil-loc">Based in Seattle, WA · Available worldwide</p>
     </div>
   </div>
 </section>
@@ -917,13 +993,13 @@ footer{
       <div class="contact-item"><span class="contact-dot"></span>Seattle, WA · Available worldwide</div>
       <div class="contact-item"><span class="contact-dot"></span>Currently taking new projects</div>
     </div>
-    <div class="contact-form reveal" style="transition-delay:.12s">
-      <input type="text" placeholder="Your name" autocomplete="name">
-      <input type="email" placeholder="Your email" autocomplete="email">
-      <input type="text" placeholder="Your business name">
-      <textarea placeholder="Tell me about your project — what do you need, and what's the dream outcome?"></textarea>
+    <form class="contact-form reveal" id="contactForm" style="transition-delay:.12s" novalidate>
+      <input type="text" name="name" placeholder="Your name" autocomplete="name" required>
+      <input type="email" name="email" placeholder="Your email" autocomplete="email" required>
+      <input type="text" name="business" placeholder="Your business name">
+      <textarea name="message" placeholder="Tell me about your project — what do you need, and what's the dream outcome?" required></textarea>
       <button type="submit">Send message &rarr;</button>
-    </div>
+    </form>
   </div>
 </section>
 
@@ -1054,18 +1130,51 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// ── FORM SUBMIT (no-op, just UX polish) ──
-const btn = document.querySelector('.contact-form button');
-if (btn) {
-  btn.addEventListener('click', e => {
+// ── FORM SUBMIT ──
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', async e => {
     e.preventDefault();
+    const btn = contactForm.querySelector('button[type="submit"]');
     const orig = btn.textContent;
-    btn.textContent = 'Sent! ✦';
-    btn.style.background = '#4A7C5A';
-    setTimeout(() => {
-      btn.textContent = orig;
-      btn.style.background = '';
-    }, 3000);
+
+    // Basic validation
+    const name = contactForm.querySelector('[name="name"]').value.trim();
+    const email = contactForm.querySelector('[name="email"]').value.trim();
+    const message = contactForm.querySelector('[name="message"]').value.trim();
+    if (!name || !email || !message) return;
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://formspree.io/f/xgongpzk', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(contactForm)
+      });
+
+      if (res.ok) {
+        btn.textContent = 'Sent! ✦';
+        btn.style.background = '#4A7C5A';
+        contactForm.reset();
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 4000);
+      } else {
+        throw new Error();
+      }
+    } catch {
+      btn.textContent = 'Something went wrong — try again';
+      btn.style.background = '#b94040';
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 4000);
+    }
   });
 }
 
