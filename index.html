@@ -5,16 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Maneki Studio — Good fortune starts with great design</title>
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; script-src 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://formspree.io https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP2KYDQ9HW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SP2KYDQ9HW');
-</script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://formspree.io https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com">
+<script src="consent.js" defer></script>
 <link rel="stylesheet" href="styles.css">
 <script>(function(){var t=localStorage.getItem('maneki-theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
 <style>
@@ -1002,11 +994,12 @@ footer{
       <div class="contact-item"><span class="contact-dot"></span>Seattle, WA · Available worldwide</div>
       <div class="contact-item"><span class="contact-dot"></span>Currently taking new projects</div>
     </div>
-    <form class="contact-form reveal" id="contactForm" style="transition-delay:.12s" novalidate>
+    <form class="contact-form reveal" id="contactForm" style="transition-delay:.12s" aria-describedby="contactPrivacy" novalidate>
       <input type="text" name="name" placeholder="Your name" autocomplete="name" required>
       <input type="email" name="email" placeholder="Your email" autocomplete="email" required>
       <input type="text" name="business" placeholder="Your business name">
       <textarea name="message" placeholder="Tell me about your project — what do you need, and what's the dream outcome?" required></textarea>
+      <p class="contact-privacy" id="contactPrivacy">Maneki Studio uses these details to respond to your inquiry and discuss a potential project. No personal information is sold or used for ads. See the <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms</a>.</p>
       <button type="submit">Send message &rarr;</button>
     </form>
   </div>
@@ -1020,6 +1013,8 @@ footer{
       <span class="footer-copy">&copy; 2026 Maneki Studio. Crafted with care in Seattle.</span>
     </div>
     <div class="footer-right">
+      <a href="privacy.html" class="privacy-link">Privacy</a>
+      <a href="terms.html" class="privacy-link">Terms</a>
       <div class="social-links" aria-label="Social links">
         <a href="#" class="social-icon" title="Instagram" aria-label="Instagram">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>

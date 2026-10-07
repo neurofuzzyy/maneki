@@ -103,6 +103,40 @@ nav{
   nav{padding:0 20px}
 }
 
+/* ── PRIVACY CONTROLS ── */
+.privacy-banner{
+  position:fixed;z-index:10000;left:24px;right:24px;bottom:24px;
+  display:flex;align-items:center;justify-content:space-between;gap:32px;
+  max-width:920px;margin:0 auto;padding:22px 24px;
+  color:var(--ink);background:var(--card);border:1px solid var(--border);
+  border-radius:10px;box-shadow:0 16px 48px rgba(26,23,20,.18);
+  font-family:var(--sans);
+}
+.privacy-banner[hidden],.privacy-settings[hidden]{display:none}
+.privacy-banner-copy{max-width:620px}
+.privacy-banner strong{display:block;margin-bottom:6px;font-size:15px}
+.privacy-banner p{margin:0;color:var(--stone);font-size:13px;line-height:1.6}
+.privacy-banner a,.privacy-link,.contact-privacy a{color:var(--red);text-underline-offset:3px}
+.privacy-choice-status{display:block;margin-top:6px;color:var(--stone);font-size:12px}
+.privacy-banner-actions{display:flex;gap:10px;flex-shrink:0}
+.privacy-banner button,.privacy-settings{
+  border:1px solid var(--border);border-radius:100px;padding:10px 16px;
+  color:var(--ink);background:var(--card);font:600 12px var(--sans);cursor:pointer;
+}
+.privacy-banner .privacy-accept{color:white;background:var(--red);border-color:var(--red)}
+.privacy-settings{
+  position:fixed;z-index:9999;right:18px;bottom:18px;
+  box-shadow:0 6px 20px rgba(26,23,20,.12);
+}
+.contact-privacy{margin:2px 0 4px;color:var(--stone);font:12px/1.6 var(--sans)}
+.privacy-link{font:500 12px var(--sans)}
+
+@media(max-width:720px){
+  .privacy-banner{left:12px;right:12px;bottom:12px;align-items:stretch;flex-direction:column;gap:16px}
+  .privacy-banner-actions{flex-direction:column-reverse}
+  .privacy-banner button{width:100%}
+}
+
 /* ── REDUCED MOTION ── */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{
