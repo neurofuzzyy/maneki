@@ -21,16 +21,8 @@
 <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; script-src 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://formspree.io https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP2KYDQ9HW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SP2KYDQ9HW');
-</script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://formspree.io https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com">
+<script src="consent.js" defer></script>
 <link rel="stylesheet" href="styles.css">
 <script>(function(){var t=localStorage.getItem('maneki-theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
 <style>
@@ -534,14 +526,6 @@ footer{
 .footer-logo{font-family:var(--sans);font-weight:600;color:var(--ink);font-size:16px;letter-spacing:-0.2px}
 .footer-copy{font-size:13px;color:var(--stone);font-family:var(--sans)}
 .footer-right{display:flex;align-items:center;gap:28px}
-.social-links{display:flex;gap:14px}
-.social-icon{
-  width:36px;height:36px;border-radius:50%;border:1px solid var(--border);
-  display:inline-flex;align-items:center;justify-content:center;
-  font-size:14px;color:var(--stone);
-  transition:border-color .2s,color .2s,transform .2s;cursor:none;text-decoration:none;
-}
-.social-icon:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px)}
 .back-to-top{
   font-family:var(--sans);font-size:13px;font-weight:500;color:var(--stone);
   text-decoration:none;transition:color .2s;
@@ -1018,11 +1002,12 @@ footer{
       <div class="contact-item"><span class="contact-dot"></span>Seattle, WA · Available worldwide</div>
       <div class="contact-item"><span class="contact-dot"></span>Currently taking new projects</div>
     </div>
-    <form class="contact-form reveal" id="contactForm" style="transition-delay:.12s" novalidate>
+    <form class="contact-form reveal" id="contactForm" style="transition-delay:.12s" aria-describedby="contactPrivacy" novalidate>
       <input type="text" name="name" placeholder="Your name" autocomplete="name" required>
       <input type="email" name="email" placeholder="Your email" autocomplete="email" required>
       <input type="text" name="business" placeholder="Your business name">
       <textarea name="message" placeholder="Tell me about your project — what do you need, and what's the dream outcome?" required></textarea>
+      <p class="contact-privacy" id="contactPrivacy">Maneki Studio uses these details to respond to your inquiry and discuss a potential project. No personal information is sold or used for ads. See the <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms</a>.</p>
       <button type="submit">Send message &rarr;</button>
     </form>
   </div>
@@ -1036,20 +1021,8 @@ footer{
       <span class="footer-copy">&copy; 2026 Maneki Studio. Crafted with care in Seattle.</span>
     </div>
     <div class="footer-right">
-      <div class="social-links" aria-label="Social links">
-        <a href="#" class="social-icon" title="Instagram" aria-label="Instagram">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        </a>
-        <a href="#" class="social-icon" title="Twitter / X" aria-label="Twitter">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M4 20L20 4"/></svg>
-        </a>
-        <a href="#" class="social-icon" title="LinkedIn" aria-label="LinkedIn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.01M11 17v-4c0-1.1.9-2 2-2s2 .9 2 2v4M11 10v7"/></svg>
-        </a>
-        <a href="#" class="social-icon" title="Dribbble" aria-label="Dribbble">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M6.5 6.5 Q10 14 18 16"/><path d="M15 3 Q13 11 7 17"/></svg>
-        </a>
-      </div>
+      <a href="privacy.html" class="privacy-link">Privacy</a>
+      <a href="terms.html" class="privacy-link">Terms</a>
       <a href="#home" class="back-to-top">&#8593; Back to top</a>
     </div>
   </div>
@@ -1062,7 +1035,7 @@ footer{
 // ── CUSTOM CURSOR ──
 const dot = document.getElementById('dot');
 let mx = -100, my = -100, dx = -100, dy = -100;
-const interactables = 'a, button, .svc, .work-item, .social-icon, .back-to-top, input, textarea';
+const interactables = 'a, button, .svc, .work-item, .back-to-top, input, textarea';
 
 if (!('ontouchstart' in window)) {
   document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
