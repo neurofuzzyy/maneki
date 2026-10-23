@@ -3,20 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maneki Studio — Good fortune starts with great design</title>
-<meta name="description" content="Independent web design and visual identity studio creating considered websites and brands for growing businesses.">
+<title>Seattle Web Design & Brand Identity Studio | Maneki Studio</title>
+<meta name="description" content="Maneki Studio is a Seattle web design and brand identity studio creating considered websites and visual systems for growing businesses.">
+<link rel="canonical" href="https://maneki.studio/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Maneki Studio">
-<meta property="og:title" content="Maneki Studio — Good fortune starts with great design">
-<meta property="og:description" content="Independent web design and visual identity studio creating considered websites and brands for growing businesses.">
+<meta property="og:title" content="Seattle Web Design & Brand Identity Studio | Maneki Studio">
+<meta property="og:description" content="Maneki Studio is a Seattle web design and brand identity studio creating considered websites and visual systems for growing businesses.">
 <meta property="og:url" content="https://maneki.studio/">
 <meta property="og:image" content="https://maneki.studio/social-preview.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Maneki Studio — Good fortune starts with great design.">
+<meta property="og:image:alt" content="Maneki Studio — Seattle web design and brand identity.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://maneki.studio/social-preview.png">
-<meta name="twitter:image:alt" content="Maneki Studio — Good fortune starts with great design.">
+<meta name="twitter:image:alt" content="Maneki Studio — Seattle web design and brand identity.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -24,6 +25,33 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://formspree.io https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com">
 <script src="consent.js" defer></script>
 <link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://maneki.studio/#business",
+      "name": "Maneki Studio",
+      "url": "https://maneki.studio/",
+      "email": "hello@maneki.studio",
+      "description": "Seattle web design and brand identity studio for growing businesses.",
+      "areaServed": {
+        "@type": "City",
+        "name": "Seattle"
+      },
+      "serviceType": ["Web design", "Brand identity", "Website redesign", "Visual identity"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://maneki.studio/#website",
+      "url": "https://maneki.studio/",
+      "name": "Maneki Studio",
+      "publisher": { "@id": "https://maneki.studio/#business" }
+    }
+  ]
+}
+</script>
 <script>(function(){var t=localStorage.getItem('maneki-theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
 <style>
 /* ── DARK MODE (index-specific overrides) ── */
@@ -307,7 +335,7 @@ section{padding:140px 64px}
   font-family:var(--display);font-style:italic;font-weight:400;
   font-size:clamp(32px,5.5vw,76px);
   line-height:1;letter-spacing:-1.5px;
-  color:var(--ink);text-align:center;
+  color:var(--ink);text-align:center;text-decoration:none;
   transition:font-weight .2s,letter-spacing .2s;
 }
 .svc-row:hover .svc-row-title{font-weight:700;letter-spacing:-2px}
@@ -757,7 +785,7 @@ footer{
     <li class="svc-row">
       <span class="svc-row-num">01</span>
       <div class="svc-row-body">
-        <span class="svc-row-title">Website Design</span>
+        <a class="svc-row-title" href="web-design.html">Website Design</a>
         <p class="svc-row-desc">Custom-built sites that load fast, look stunning on every screen, and are designed around one goal — converting visitors into customers.</p>
       </div>
       <span class="svc-row-arrow" aria-hidden="true">&rarr;</span>
@@ -765,7 +793,7 @@ footer{
     <li class="svc-row">
       <span class="svc-row-num">02</span>
       <div class="svc-row-body">
-        <span class="svc-row-title">Brand Identity</span>
+        <a class="svc-row-title" href="brand-identity.html">Brand Identity</a>
         <p class="svc-row-desc">Your full visual language — logo, colour, typography, and usage rules — so you're instantly recognizable everywhere you show up.</p>
       </div>
       <span class="svc-row-arrow" aria-hidden="true">&rarr;</span>
@@ -773,7 +801,7 @@ footer{
     <li class="svc-row">
       <span class="svc-row-num">03</span>
       <div class="svc-row-body">
-        <span class="svc-row-title">Logos &amp; Graphics</span>
+        <a class="svc-row-title" href="brand-identity.html">Logos &amp; Graphics</a>
         <p class="svc-row-desc">Marks, icon systems, and print-ready graphics that look sharp at every size — from a favicon to a full-face billboard.</p>
       </div>
       <span class="svc-row-arrow" aria-hidden="true">&rarr;</span>
@@ -1131,6 +1159,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ── FORM SUBMIT ──
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
+  const trackContactEvent = eventName => {
+    if (window.manekiAnalyticsEnabled && window.gtag) {
+      window.gtag('event', eventName, { form_id: 'contact' });
+    }
+  };
+  let formStarted = false;
+  contactForm.addEventListener('focusin', () => {
+    if (!formStarted) {
+      formStarted = true;
+      trackContactEvent('form_start');
+    }
+  });
   contactForm.addEventListener('submit', async e => {
     e.preventDefault();
     const btn = contactForm.querySelector('button[type="submit"]');
@@ -1154,6 +1194,7 @@ if (contactForm) {
       });
 
       if (res.ok) {
+        trackContactEvent('generate_lead');
         btn.textContent = 'Sent! ✦';
         btn.style.background = '#4A7C5A';
         contactForm.reset();

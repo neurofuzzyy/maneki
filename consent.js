@@ -2,6 +2,7 @@
   'use strict';
 
   const measurementId = 'G-SP2KYDQ9HW';
+  window.manekiAnalyticsEnabled = false;
   const storageKey = 'maneki-analytics-consent';
   const validChoices = new Set(['granted', 'denied']);
 
@@ -45,6 +46,7 @@
   };
 
   const loadAnalytics = () => {
+    window.manekiAnalyticsEnabled = true;
     window[`ga-disable-${measurementId}`] = false;
     updateGoogleConsent('granted');
 
@@ -80,6 +82,7 @@
   };
 
   const disableAnalytics = () => {
+    window.manekiAnalyticsEnabled = false;
     window[`ga-disable-${measurementId}`] = true;
     updateGoogleConsent('denied');
     deleteAnalyticsCookies();
