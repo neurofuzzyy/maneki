@@ -44,10 +44,9 @@
   --t-nav:   clamp(17px,1.39vw,20px);   /* Navigation — 20 Regular */
   --t-body:  16px;                      /* body — 16 Regular */
 
-  /* layout: 1040px column centred in the 1440 frame */
-  --col:  1040px;
+  /* layout: side margins scale with the window (~130px at 1440, max 160px) */
   --edge: clamp(24px,5vw,72px);
-  --side: max(var(--edge),calc((100% - var(--col)) / 2));
+  --side: clamp(24px,9vw,160px);
 }
 [data-theme="dark"]{
   --rice:   #0F0D0B;
