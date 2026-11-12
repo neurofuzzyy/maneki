@@ -17,18 +17,60 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="services.css">
 </head>
-<body>
-<nav><a href="/" class="nav-logo">Maneki Studio</a><a href="/#contact" class="back-link">Start a project</a></nav>
-<main>
-  <p class="service-kicker">Seattle brand identity</p>
-  <h1>A visual identity people can recognize before they read the name.</h1>
-  <p class="service-intro">Maneki Studio helps Seattle businesses turn an idea, a shift in direction, or a growing reputation into a visual system with real character and day-to-day usefulness.</p>
-  <div class="service-grid">
-    <section class="service-section"><h2>More than a logo</h2><p>A useful identity gives your business a coherent way to show up across a website, a proposal, a social post, a sign, or a printed piece. It is designed to stay recognizable while adapting to the context.</p></section>
-    <section class="service-section"><h2>What a project includes</h2><ul><li>Positioning and visual-direction exploration</li><li>Logo, colour, and typography systems</li><li>Supporting marks, icons, and graphics</li><li>Clear guidelines and production-ready files</li></ul></section>
-  </div>
-  <section class="service-proof"><h2>Systems with a point of view</h2><p>From the cultural energy of the <a href="/mopop">MoPOP symbol set</a> to the expressive identity for <a href="/tendril">Tendril Tattoo</a>, Maneki creates visual languages that fit the work rather than following a category template.</p></section>
-  <section class="service-cta"><h2>Ready for a brand that feels unmistakably yours?</h2><a href="/#contact">Start a project</a></section>
+<body class="service-page">
+<a class="skip-link" href="#main">skip to content</a>
+<header class="site-header">
+  <a href="/" aria-label="maneki studio — home">maneki studio</a>
+  <nav class="site-nav" aria-label="Main">
+    <ul>
+      <li><a href="/#services">services</a></li>
+      <li><a href="/#about">about</a></li>
+      <li><a href="/#contact">contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="service-head wrap">
+    <h1 class="t-large">brand identity</h1>
+    <p class="t-hero">telling your story through color and typography.</p>
+  </section>
+
+  <section class="project wrap" aria-labelledby="project-title">
+    <h2 class="t-hero" id="project-title">1_tendril tattoo</h2>
+    <div class="project-cols">
+      <p>Tendril is a conceptual tattoo studio that specializes in custom sigils — symbolic designs created in collaboration with each client. Each sigil encodes personal mantras, memories, or affirmations, resulting in tattoos that are intimate and deeply individual.</p>
+      <p>Visually, the designs draw from organic patterns found in nature, evoking resilience, memory, and transformation. Tendril offers an alternative to traditional tattooing by turning inward meaning into outward mark.</p>
+    </div>
+    <div class="demo-slot">
+      <!-- DEMO — interim images from the repo; swap for the Figma "Tendril Demo" export -->
+      <div class="demo" role="region" aria-label="Tendril Tattoo brand identity demo">
+        <button class="demo-btn" type="button" aria-expanded="false" aria-label="Enlarge demo"><span class="when-closed" aria-hidden="true">&#8599;</span><span class="when-open" aria-hidden="true">&times;</span></button>
+        <div class="demo-scroll" tabindex="0">
+          <div class="demo-content">
+          <img src="images/tendril/framer-01.webp" alt="Tendril studio wall with framed sigil prints" width="1800" height="1200" loading="lazy" decoding="async">
+          <img src="images/tendril/publication/Frame%201.webp" alt="Tendril publication cover spread" width="1800" height="1022" loading="lazy" decoding="async">
+          <img src="images/tendril/photo-3.webp" alt="Tendril sigil shirt worn outdoors" width="1200" height="900" loading="lazy" decoding="async">
+          <img src="images/tendril/publication/Frame%204.webp" alt="Publication spread: form follows feeling" width="1800" height="1022" loading="lazy" decoding="async">
+          <img src="images/tendril/framer-04.webp" alt="Tendril aftercare products in wildflowers" width="1800" height="1350" loading="lazy" decoding="async">
+          <img src="images/tendril/publication/Frame%2010.webp" alt="Publication spread of sigil designs" width="1800" height="1022" loading="lazy" decoding="async">
+          <img src="images/tendril/photo-1.webp" alt="Two people wearing Tendril shirts at dusk" width="800" height="1200" loading="lazy" decoding="async">
+          <img src="images/tendril/publication/Frame%207.webp" alt="Publication spread with a back tattoo" width="1800" height="1022" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
+
+<footer class="site-footer">
+  <span>&copy; 2026 maneki studio</span>
+  <ul>
+    <li><a href="privacy.html">privacy</a></li>
+    <li><a href="terms.html">terms</a></li>
+  </ul>
+</footer>
+
+<script src="services.js" defer></script>
 </body>
 </html>

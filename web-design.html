@@ -17,18 +17,51 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="services.css">
 </head>
-<body>
-<nav><a href="/" class="nav-logo">Maneki Studio</a><a href="/#contact" class="back-link">Start a project</a></nav>
-<main>
-  <p class="service-kicker">Seattle web design</p>
-  <h1>A website that looks like your business belongs here.</h1>
-  <p class="service-intro">Maneki Studio designs custom websites for Seattle businesses ready to move beyond a template, an outdated site, or a digital presence that does not match the quality of their work.</p>
-  <div class="service-grid">
-    <section class="service-section"><h2>Built around the decision</h2><p>Every page has a job: make your offer understandable, show the right proof, and give a prospective customer a clear next step. The work starts with your audience and your business—not a theme.</p></section>
-    <section class="service-section"><h2>What a project includes</h2><ul><li>Site structure and page strategy</li><li>Custom visual design for desktop and mobile</li><li>Clear service, proof, and inquiry paths</li><li>Launch support and a practical handoff</li></ul></section>
-  </div>
-  <section class="service-proof"><h2>Design with a Seattle point of view</h2><p>Maneki is based in Seattle and works with businesses that care about craft, clarity, and a site that earns its place in a competitive local market. See the <a href="/mopop">MoPOP symbol-set project</a> for a local example of a visual system designed to carry a distinct cultural voice.</p></section>
-  <section class="service-cta"><h2>Need a website that can carry the next stage of your business?</h2><a href="/#contact">Start a project</a></section>
+<body class="service-page">
+<a class="skip-link" href="#main">skip to content</a>
+<header class="site-header">
+  <a href="/" aria-label="maneki studio — home">maneki studio</a>
+  <nav class="site-nav" aria-label="Main">
+    <ul>
+      <li><a href="/#services">services</a></li>
+      <li><a href="/#about">about</a></li>
+      <li><a href="/#contact">contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="service-head wrap">
+    <h1 class="t-large">websites</h1>
+    <p class="t-hero">we take care of your entire site—designing, building, and shipping.</p>
+  </section>
+
+  <section class="project wrap" aria-labelledby="project-title">
+    <h2 class="t-hero" id="project-title">1_corsini carpentry</h2>
+    <div class="project-cols">
+      <p>Corsini Carpentry was founded on the belief that things should be built to last. Every project is approached with careful attention to detail, thoughtful craftsmanship, and a commitment to quality over shortcuts. From custom carpentry to home repairs and installations, the goal is simple: create durable, functional work that homeowners can be proud of, at a fair and honest price.</p>
+      <blockquote>
+        <p>“Maneki Studio was wonderful to work with—straightforward, efficient, and visually captured exactly what I was hoping for with my site. I hope to work with them again soon”.</p>
+        <cite>—Massimo Corsini</cite>
+      </blockquote>
+    </div>
+    <div class="demo-slot">
+      <!-- DEMO — Corsini Carpentry scrolling demo goes here -->
+      <div class="demo is-empty" role="img" aria-label="Corsini Carpentry website demo (demo coming soon)">
+        <div class="demo-scroll"></div>
+      </div>
+    </div>
+  </section>
 </main>
+
+<footer class="site-footer">
+  <span>&copy; 2026 maneki studio</span>
+  <ul>
+    <li><a href="privacy.html">privacy</a></li>
+    <li><a href="terms.html">terms</a></li>
+  </ul>
+</footer>
+
+<script src="services.js" defer></script>
 </body>
 </html>
