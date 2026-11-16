@@ -1,0 +1,23 @@
+{
+  "_comment": "Canonical gate is devkit/scripts/legal.mjs, enrolled 2026-11-16. Green here means consistent with the fleet, never means lawful.",
+  "_licence_comment": "NO `license` BLOCK, ON PURPOSE. This repo belongs to the neurofuzzyy account, and devkit does not deliver its LICENSE, COMMERCIAL.md or CLA here, because those would put the code under a licence its owner has not chosen. The repo has no LICENSE file today, so the gate has nothing to compare and asserts nothing about licensing. Whoever picks a licence adds the block in the same commit.",
+  "entity": "Maneki Studio",
+  "domain": "maneki.studio",
+  "_pages_comment": "Beyond the four markers the gate derives (a contact route, the operator, an effective date, an address at maneki.studio), each page names what would make it untrue if it went missing: the privacy page its three processors and its no-sale claim; the Terms the clause saying an enquiry is not an engagement. WHAT THIS CANNOT SEE: whether either document is lawful, whether Formspree, Google and Cloudflare still do what the policy says, and whether hello@maneki.studio is read.",
+  "pages": [
+    {
+      "label": "Privacy (en)",
+      "path": "privacy.html",
+      "contains": ["Formspree", "Google Analytics", "Cloudflare", "does not sell personal information"]
+    },
+    {
+      "label": "Terms (en)",
+      "path": "terms.html",
+      "contains": ["does not create a client relationship", "Privacy Policy"]
+    }
+  ],
+  "_fonts_comment": "Six self-hosted faces from four SIL OFL 1.1 families. OFL requires the licence to travel with every copy, and none did until 2026-11-16, when each family's OFL.txt was copied beside its woff2 from google/fonts' `ofl/<family>/OFL.txt`. WHAT IT CANNOT SEE: whether the text beside a font is the licence that font was released under; reading the source is the only check there is.",
+  "fonts": {
+    "dirs": ["fonts"]
+  }
+}

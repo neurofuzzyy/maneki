@@ -1,0 +1,124 @@
+{
+  "_comment": [
+    "Canonical gate is devkit/scripts/smoke.mjs, enrolled 2026-11-16. maneki has no build: the files in this directory are what Cloudflare Pages serves, so smoke reads the source and the source is the output.",
+    "Every page asserts four structural markers: the language, its own canonical address, the consent runtime (analytics loads only through consent.js, so a page without it either has no analytics or loads gtag some other way), and the closing tag. The home page adds its stylesheet and the Privacy and Terms links. minBytes is about 40% of each page as measured on 2026-11-16, so a copy edit never trips it.",
+    "WHAT THIS CANNOT SEE: a page not listed here (a new project page has to be added by hand), anything a browser does after the HTML arrives, and absence: an inline gtag loader beside consent.js would pass."
+  ],
+  "files": [
+    {
+      "path": "index.html",
+      "minBytes": 5200,
+      "contains": [
+        "<html lang=\"en\">",
+        "<link rel=\"canonical\" href=\"https://maneki.studio/\">",
+        "<script src=\"consent.js\" defer>",
+        "</html>",
+        "href=\"privacy.html\"",
+        "href=\"terms.html\"",
+        "<link rel=\"stylesheet\" href=\"styles.css"
+      ]
+    },
+    {
+      "path": "privacy.html",
+      "minBytes": 2800,
+      "contains": [
+        "<html lang=\"en\">",
+        "<link rel=\"canonical\" href=\"https://maneki.studio/privacy\">",
+        "<script src=\"consent.js\" defer>",
+        "</html>",
+        "hello@maneki.studio"
+      ]
+    },
+    {
+      "path": "terms.html",
+      "minBytes": 2700,
+      "contains": [
+        "<html lang=\"en\">",
+        "<link rel=\"canonical\" href=\"https://maneki.studio/terms\">",
+        "<script src=\"consent.js\" defer>",
+        "</html>",
+        "hello@maneki.studio"
+      ]
+    },
+    {
+      "path": "broadsheet.html",
+      "minBytes": 3000,
+      "contains": [
+        "<html lang=\"en\">",
+        "<link rel=\"canonical\" href=\"https://maneki.studio/broadsheet\">",
+        "<script src=\"consent.js\" defer>",
+        "</html>"
+      ]
+    },
+    {
+      "path": "brand-identity.html",
+      "minBytes": 1400,
+      "contains": [
+        "<html lang=\"en\">",
+        "<link rel=\"canonical\" href=\"https://maneki.studio/brand-identity\">",
+        "<script src=\"consent.js\" defer>",
+        "</html>"
+      ]
+    },
+    {
+      "path": "graphics-and-visuals.html",
+      "minBytes": 1400,
+      "contains": [
+        "<html lang=\"en\">",
+        "<link rel=\"canonical\" href=\"https://maneki.studio/graphics-and-visuals\">",
+        "<script src=\"consent.js\" defer>",
+        "</html>"
+      ]
+    },
+    {
+      "path": "mopop.html",
+      "minBytes": 2700,
+      "contains": [
+        "<html lang=\"en\">",
+        "<link rel=\"canonical\" href=\"https://maneki.studio/mopop\">",
+        "<script src=\"consent.js\" defer>",
+        "</html>"
+      ]
+    },
+    {
+      "path": "randamu.html",
+      "minBytes": 3400,
+      "contains": [
+        "<html lang=\"en\">",
+        "<link rel=\"canonical\" href=\"https://maneki.studio/randamu\">",
+        "<script src=\"consent.js\" defer>",
+        "</html>"
+      ]
+    },
+    {
+      "path": "tendril.html",
+      "minBytes": 5100,
+      "contains": [
+        "<html lang=\"en\">",
+        "<link rel=\"canonical\" href=\"https://maneki.studio/tendril\">",
+        "<script src=\"consent.js\" defer>",
+        "</html>"
+      ]
+    },
+    {
+      "path": "web-design.html",
+      "minBytes": 1300,
+      "contains": [
+        "<html lang=\"en\">",
+        "<link rel=\"canonical\" href=\"https://maneki.studio/web-design\">",
+        "<script src=\"consent.js\" defer>",
+        "</html>"
+      ]
+    },
+    {
+      "path": "website-redesign.html",
+      "minBytes": 1200,
+      "contains": [
+        "<html lang=\"en\">",
+        "<link rel=\"canonical\" href=\"https://maneki.studio/website-redesign\">",
+        "<script src=\"consent.js\" defer>",
+        "</html>"
+      ]
+    }
+  ]
+}

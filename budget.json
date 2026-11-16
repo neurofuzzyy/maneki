@@ -1,0 +1,32 @@
+{
+  "_comment": "Canonical gate is devkit/scripts/budget.mjs, enrolled 2026-11-16. Comments are excluded from every line count on purpose: the portfolio does not ration documentation. Caps sit close to what was measured that day, so growth is noticed on the commit that causes it.",
+  "_code_comment": "NAMED FILES, NO DIRS. The authored logic is the two root scripts; there is no src/ to point at, and putting '.' in dirs would sweep every tool file that arrives next without anyone deciding. WHAT THIS CANNOT SEE: the inline <script> blocks in the HTML pages (the theme toggle on every page, JSON-LD on the home page), which no row counts because they live inside files that are mostly markup. A page that grows real logic inline is code nobody measures; move it into a named .js file.",
+  "code": {
+    "label": "Code lines",
+    "files": [
+      "consent.js",
+      "services.js"
+    ],
+    "cap": 190
+  },
+  "_deps_comment": "ZERO, AND THE ZERO IS THE POINT. This site has no build and Cloudflare Pages serves this directory as it stands, so a runtime dependency has nowhere to be bundled; it could only arrive as a hosted script tag, which this row cannot see (gtag is one, loaded by consent.js after a visitor allows analytics). It also keeps the repo with no node_modules for Pages to install.",
+  "deps": {
+    "cap": 0
+  },
+  "_assets_comment": "TWO ROWS, raw rather than gzipped because woff2 and webp are already compressed. FONTS: six faces from four families. IMAGES: the portfolio pictures under images/, the largest thing a visitor downloads, weighed as a whole. WHAT THIS CANNOT SEE: the HTML pages and stylesheets at the root, which no row weighs because an asset row walks a directory and the root holds the repo itself; and which images a given page loads, so one heavy project page hides in the total.",
+  "assets": [
+    {
+      "label": "Fonts",
+      "dir": "fonts",
+      "match": "\\.woff2$",
+      "cap": 240000
+    },
+    {
+      "label": "Images",
+      "dir": "images",
+      "match": "\\.(webp|png|jpe?g|avif|svg)$",
+      "cap": 6500000
+    }
+  ],
+  "_caps_comment": "MEASURED 2026-11-16: code 180 lines, fonts 232.0 KB, images 6436.5 KB. Each cap is a few percent above, so the next project page's pictures or a seventh font face is a red row and a decision rather than a drift."
+}

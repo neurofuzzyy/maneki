@@ -1,0 +1,14 @@
+{
+  "name": "maneki",
+  "private": true,
+  "type": "module",
+  "description": "maneki.studio. A static site: no build, so the files here are the files Cloudflare Pages serves.",
+  "scripts": {
+    "smoke": "node scripts/smoke.mjs",
+    "budget": "node scripts/budget.mjs",
+    "legal": "node scripts/legal.mjs",
+    "audit": "node scripts/audit.mjs",
+    "headers": "node scripts/headers.mjs https://maneki.studio/",
+    "check": "npm run smoke && npm run budget && npm run legal && npm run audit"
+  }
+}
