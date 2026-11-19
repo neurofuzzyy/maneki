@@ -178,6 +178,35 @@ export const measure = (run, tries = 2, gap = 30000, nap = (ms) => Atomics.wait(
   tries < 1 ? null : run() ?? (tries < 2 ? null : (nap(gap), measure(run, tries - 1, gap, nap)));
 
 /**
+ * Waived by name, or flagged ONLY through packages that are.
+ *
+ * npm reports every package on a vulnerable path as vulnerable itself, with
+ * `via` naming the dependency it came through; only the package carrying the
+ * advisory has an object there. Added 2026-11-18, when GHSA-fc5q-39xc-vjpf
+ * landed on picomatch with no patched version and reddened 14 of 15 repos
+ * through vite, vitest, typescript-eslint and lint-staged. Waiving the root
+ * alone left every parent red; waiving the parents too would have silenced
+ * vitest's next real advisory. So a parent passes only while EVERY path it is
+ * flagged through ends at a waived name, and an advisory of its own (an object
+ * in `via`) keeps it red. It is a walk over the graph rather than over one path,
+ * because `via` has cycles (vitest and @vitest/coverage-v8 name each other) and
+ * a path-based first version read the cycle as uncovered from one end. Every
+ * package reached at high or above is visited once, the walk stops at waived
+ * names, an advisory at any unwaived package fails it, and it passes only if it
+ * reached a waived name, so a cycle with no waived way out stays red. Edges to
+ * a package below high are not followed: that is not what made this one high
+ * (typescript-estree also lists a moderate minimatch).
+ */
+export function covered(name, vulns, waived) {
+  const todo = [name], seen = new Set(todo);
+  for (let n; (n = todo.pop()) !== undefined;) for (const x of waived[n] ? [] : vulns[n]?.via ?? []) {
+    if (typeof x !== "string") return false;
+    if (!seen.has(x) && BLOCKING.includes(vulns[x]?.severity ?? "high")) seen.add(x), todo.push(x);
+  }
+  return [...seen].some((n) => waived[n]);
+}
+
+/**
  * Blocking findings, minus anything explicitly waived.
  *
  * Waiver keys are package names rather than advisory ids because that is what
@@ -187,11 +216,8 @@ export const measure = (run, tries = 2, gap = 30000, nap = (ms) => Atomics.wait(
 export function findings(report, waived = {}) {
   const rows = [];
   for (const [name, v] of Object.entries(report?.vulnerabilities ?? {})) {
-    if (!BLOCKING.includes(v.severity)) continue;
-    if (waived[name]) continue;
-    const ids = (v.via ?? [])
-      .map((x) => (typeof x === "object" ? x.source ?? x.url ?? x.title : null))
-      .filter(Boolean);
+    if (!BLOCKING.includes(v.severity) || covered(name, report.vulnerabilities, waived)) continue;
+    const ids = (v.via ?? []).map((x) => (typeof x === "object" ? x.source ?? x.url ?? x.title : null)).filter(Boolean);
     rows.push({
       name,
       severity: v.severity,
@@ -252,16 +278,11 @@ export function report(rows, state, waived = {}, dir = ".", fatal = false) {
   const waivers = Object.keys(waived);
   if (!rows.length) {
     // Stryker disable next-line StringLiteral: printed wording, which no test should assert
-    console.log(`  ✓  ${scope.padEnd(28)} none at high or critical${waivers.length ? ` (${waivers.length} waived)` : ""}`);
-    // Stryker disable next-line StringLiteral: printed wording, which no test should assert
-    console.log("");
+    console.log(`  ✓  ${scope.padEnd(28)} none at high or critical${waivers.length ? ` (${waivers.length} waived)` : ""}\n`);
     return 0;
   }
-  for (const r of rows) {
-    const how = r.fixable ? "fix available" : "NO FIX — remove, replace, or waive with a reason";
-    // Stryker disable next-line StringLiteral: printed wording, which no test should assert
-    console.log(`  ✗  ${r.name.padEnd(28)} ${r.severity.padEnd(9)} ${how}`);
-  }
+  // Stryker disable next-line StringLiteral: printed wording, which no test should assert
+  for (const r of rows) console.log(`  ✗  ${r.name.padEnd(28)} ${r.severity.padEnd(9)} ${r.fixable ? "fix available" : "NO FIX — remove, replace, or waive with a reason"}`);
   // Stryker disable next-line StringLiteral: printed wording, which no test should assert
   console.log("");
   // Stryker disable next-line StringLiteral: printed wording, which no test should assert
