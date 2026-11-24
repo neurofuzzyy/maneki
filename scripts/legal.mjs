@@ -8,7 +8,7 @@
 // This exists because a 2026-08-11 fleet audit found erickwatson.com shipping
 // a LICENSE that assigned copyright to an unrelated third party, scd — the
 // most valuable asset in the portfolio — published under MIT, which permits a
-// competitor to sell it and owe nothing, and `erick@sproutvest.com` in the
+// competitor to sell it and owe nothing, and the owner's personal address in the
 // footer of every diagnostic email the worker sends. None of these were
 // visible to any gate. Legal surface rots exactly like code, but silently:
 // nothing 404s, nothing goes red, and the damage is discovered by a lawyer.
