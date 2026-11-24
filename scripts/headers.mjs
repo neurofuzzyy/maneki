@@ -87,16 +87,19 @@ export function report(missing, url, reachable) {
  * This repo's `_headers`, or null if it keeps none.
  *
  * Where it lives differs — Astro serves from `public/`, Eleventy from
- * `content/`, scd's client is a workspace package, and a site with no build
- * (maneki) serves its root — so it is found rather than configured. The root
+ * `content/`, scd's client is a workspace package, a site with no build
+ * (maneki) serves its root, and Feeling's plain HTML is served from `site/` —
+ * so it is found rather than configured. The root
  * is asked last, so a built repo's served copy wins over anything beside it.
  * Until 2026-11-16 the root was not asked at all, and maneki's six-header
- * `_headers` read as "nothing is promised": a pass that had measured nothing. A repo with no such file makes no promise, and a check with
+ * `_headers` read as "nothing is promised": a pass that had measured nothing.
+ * Feeling's `site/_headers` met the same silence on the day it enrolled
+ * (2026-11-24) and was added before its first run. A repo with no such file makes no promise, and a check with
  * nothing to assert is a pass rather than a failure: couyon-life declines a CSP
  * in writing and would otherwise be failed for honouring its own argument.
  */
 export function headersFile(root) {
-  const candidates = ["public/_headers", "content/_headers", "packages/client/public/_headers", "_headers"];
+  const candidates = ["public/_headers", "content/_headers", "packages/client/public/_headers", "site/_headers", "_headers"];
   return candidates.map((c) => join(root, c)).find(existsSync) ?? null;
 }
 
